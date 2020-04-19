@@ -190,6 +190,7 @@ header .menu .menu-item .menu-link:hover {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+    width: unset;
   }
   header .menu .menu-item {
     opacity: 1;
