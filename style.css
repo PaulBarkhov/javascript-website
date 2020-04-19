@@ -36,7 +36,7 @@ body {
 #menu-label {
   z-index: 2;
   position: absolute;
-  top: 15px;
+  top: 12px;
   right: 10px;
   font-size: 40px;
   color: black;
@@ -46,10 +46,6 @@ body {
   opacity: 1;
 }
 
-#menu-toggle:checked ~ #menu-label {
-  color: white;
-}
-
 #menu-toggle:checked ~ header {
   max-height: 1000px;
   height: 100vh;
@@ -57,17 +53,6 @@ body {
       -ms-flex-pack: start;
           justify-content: start;
   overflow-y: scroll;
-  background-color: black;
-}
-
-#menu-toggle:checked ~ header h1 {
-  color: white;
-  text-decoration: none;
-}
-
-#menu-toggle:checked ~ header .menu-link,
-#menu-toggle:checked ~ header .dropdown-link {
-  color: white;
 }
 
 @media (min-width: 801px) {
@@ -100,12 +85,17 @@ header {
   transition: max-height .3s, background-color .4s ease-out;
 }
 
-header h1 {
-  padding: 25px;
+header .logo {
+  font-size: 36px;
+  font-weight: 700;
+  padding: 20px;
+  color: black;
+  text-decoration: none;
 }
 
 header .menu {
   padding: 25px;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -141,11 +131,12 @@ header .menu .menu-item .dropdown-button:hover .dropdown-wrapper {
 
 header .menu .menu-item .dropdown {
   padding: 15px 0;
-  position: absolute;
-  top: 15%;
+  top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  position: relative;
+  background-color: pink;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -157,7 +148,6 @@ header .menu .menu-item .dropdown {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   overflow-y: scroll;
-  background-color: black;
 }
 
 header .menu .menu-item .dropdown .dropdown-item {
@@ -168,20 +158,18 @@ header .menu .menu-item .dropdown .dropdown-item {
 header .menu .menu-item .dropdown .dropdown-item .dropdown-link {
   text-transform: uppercase;
   text-decoration: none;
+  color: black;
   font-size: 20px;
   font-weight: bold;
   text-align: left;
 }
 
-header .menu .menu-item .dropdown .dropdown-item .back:active ~ .dropdown {
-  display: none;
-}
-
 header .menu .menu-item .menu-link {
   text-transform: uppercase;
   text-decoration: none;
+  color: black;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 700;
   text-align: left;
 }
 
@@ -209,13 +197,14 @@ header .menu .menu-item .menu-link:hover {
     position: relative;
   }
   header .menu .menu-item .menu-link {
-    font-size: 13px;
+    font-size: 14px;
   }
   header .menu .menu-item .dropdown {
     height: 300px;
     width: 200px;
     top: 180%;
     left: -70%;
+    position: absolute;
     overflow-y: hidden;
     background-color: white;
     outline: 1px solid black;
