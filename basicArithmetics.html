@@ -15,12 +15,12 @@
 
     <header>
 
-        <a href="#" class="logo">JavaScript</a>
+        <a href="index.html" class="logo">JavaScript</a>
 
         <ul class="menu">
 
             <li class="menu-item">
-                <a href="#" class="menu-link" onclick="dropdownToggle(1)" onblur="hideDropdown(1)">Basics</a>
+                <a href="#" class="menu-link menu-link-active" onclick="dropdownToggle(1)" onblur="hideDropdown(1)">Basics</a>
 
                 <ul class="dropdown" id="1" >
                     <li class="dropdown-item"><a href="basics.html" class="dropdown-link">Examples</a></li>
@@ -79,6 +79,92 @@
     </header>
 
     <main>
+        <div class="block">
+
+            <div class="action">
+                <h1>Addition</h1>
+                <h3>Enter 2 numbers and hit the button to complete an addition</h3>
+
+                <form class="form">
+                    <input type="text" name="addition" id="number1" placeholder="Enter number 1"> 
+                    <span class="operator">+</span>
+                    <input type="text" name="addition" id="number2" placeholder="Enter number 1">
+                    <span class="operator">=</span>
+                    <input type="text" name="addition" id="result">
+                </form>
+
+                <div class="buttons">
+                    <button class="btn" onclick="addition()">Addition</button>
+                    <button class="btn" onclick="clearInputs()">Clear</button>
+                </div>
+
+            </div>
+
+            <div class="description">
+                <textarea class="css-code x-big">
+JavaScript:
+
+function addition() {
+    let number1 = document.getElementById('number1');
+    let x = Number(number1.value);
+    let number2 = document.getElementById('number2');
+    let y = Number(number2.value);
+    let result = document.getElementById('result');
+
+    result.value = x + y;
+
+    if (result.value == "NaN") {
+        result.value = "Not a number";
+
+        if (isNaN(x)) {
+            number1.style.border = "1px solid red";
+        }
+
+        if (isNaN(y)) {
+            number2.style.border = "1px solid red";
+        }
+    }
+}
+
+function clearInputs() {
+    let number1 = document.getElementById('number1');
+    let number2 = document.getElementById('number2');
+    let result = document.getElementById('result');
+
+    number1.value = "";
+    number2.value = "";
+    result.value = "";
+
+    number1.style.border = "1px solid black";
+    number2.style.border = "1px solid black";
+}
+                </textarea>
+
+            </div>
+        </div>
+
+        <textarea class="html-code y-big" wrap="off">
+html:
+
+<div class="action">
+    <h1>Addition</h1>
+    <h3>Enter 2 numbers and hit the button to complete an addition</h3>
+
+    <form class="form">
+        <input type="text" name="addition" id="number1" placeholder="Enter number 1"> 
+        <span class="operator">+</span>
+        <input type="text" name="addition" id="number2" placeholder="Enter number 1">
+        <span class="operator">=</span>
+        <input type="text" name="addition" id="result">
+    </form>
+
+    <div class="buttons">
+        <button class="btn" onclick="addition()">Addition</button>
+        <button class="btn" onclick="clearInputs()">Clear</button>
+    </div>
+
+</div>
+                            </textarea>
     </main>
 
     <hr>

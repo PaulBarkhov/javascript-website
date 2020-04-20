@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Examples</title>
+</head>
+<body>
+    
+<div class="container">
+
+    <input type="checkbox" name="menu-toogle" id="menu-toggle">
+    <label for="menu-toggle" id="menu-label">☰</label>
+
+    <header>
+
+        <a href="index.html" class="logo">JavaScript</a>
+
+        <ul class="menu">
+
+            <li class="menu-item">
+                <a href="#" class="menu-link menu-link-active" onclick="dropdownToggle(1)" onblur="hideDropdown(1)">Basics</a>
+
+                <ul class="dropdown" id="1" >
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">Examples</a></li>
+                    <li class="dropdown-item"><a href="basicArithmetics.html" class="dropdown-link">Arithmetics</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">dolor</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">sit</a></li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="#" class="menu-link" onclick="dropdownToggle(2)" onblur="hideDropdown(2)">ipsum</a>
+
+                <ul class="dropdown" id="2">
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">amet</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">consectetur</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">adipisicing</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">elit</a></li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="#" class="menu-link" onclick="dropdownToggle(3)" onblur="hideDropdown(3)">dolor</a>
+
+                <ul class="dropdown" id="3">
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">Eaque</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">officia</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">beatae</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">consectetur</a></li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="#" class="menu-link" onclick="dropdownToggle(4)" onblur="hideDropdown(4)">sit</a>
+
+                <ul class="dropdown" id="4">
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">maiores</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">Labore</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">molestiae</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">nesciunt</a></li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="#" class="menu-link" onclick="dropdownToggle(5)" onblur="hideDropdown(5)">amet</a>
+
+                <ul class="dropdown" id="5">
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">commodi</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">illo</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">natus</a></li>
+                    <li class="dropdown-item"><a href="#" class="dropdown-link">ducimus</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </header>
+
+    <main>
+        <div class="block">
+            <div class="action">
+                <h1>Hello World!</h1>
+                <h3>Press the button below to trigger an allert</h3>
+                <button class="btn" onclick="helloWorld()">Alert!</button>
+            </div>
+
+            <div class="description">
+                <div class="html-code">
+                    <code>
+                        html: <br> <br>
+                        &lt;button onclick="helloWorld()">Alert!&lt;/button>
+                    </code>
+                </div>
+
+                <div class="js-code">
+                    <code>
+                        JavaScript: <br> <br>
+                        function helloWorld() { <br>
+                        &nbsp; alert('Hello World!'); <br>
+                        }
+                    </code>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="block block-reverse">
+            
+            <div class="description">
+                <div class="html-code">
+                    <code>
+                        html: <br> <br>
+                        &lt;h3 id="changeMe">Press the button below to change content&lt;/h3> <br>
+                        &lt;button class="btn" onclick="changeContent()">Change!&lt;/button>
+                    </code>
+                </div>
+
+                <textarea class="js-code">
+function helloWorld() {
+    alert('Hello World!');
+}
+                </textarea>
+
+
+
+            </div>
+
+            <div class="action">
+                <h1>Change content</h1>
+                <h3 id="changeMe">Press the button below to change content</h3>
+                <button class="btn" onclick="changeContent()">Change!</button>
+            </div>
+
+        </div>
+
+        <div class="block">
+            
+            <div class="action">
+                <h1>Change HTML attributes</h1>
+                <h3>Press the button below to change its class</h3>
+                <button class="btn" id="btn1" onclick="changeAttribute()">Change!</button>
+            </div>
+            
+            <div class="description">
+                <div class="html-code">
+                    <code>
+                        html: <br> <br>
+                        &lt;button class="btn" id="btn1" onclick="changeAttribute()">Change!&lt;/button>
+                    </code>
+                </div>
+
+                <div class="js-code">
+                    <code>
+                        JavaScript: <br> <br>
+                        function changeAttribute() { <br>
+                        &nbsp;    let btn1 = document.getElementById('btn1'); <br>
+                        &nbsp;    btn1.className = "btn2"; <br>
+                        }
+                    </code>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="css-code">
+            <code>
+                css: <br><br>
+                .btn { <br>
+                    &nbsp;&nbsp;background: rgb(124,36,172); <br>
+                    &nbsp;&nbsp;background: linear-gradient(331deg, rgba(124,36,172,1) 0%, rgba(190,126,218,1) 100%); <br>
+                } <br> <br>
+                .btn2 { <br>
+                    &nbsp;&nbsp;background: rgb(131,58,180);
+                    &nbsp;&nbsp;background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%); <br>
+                }
+            </code>
+        </div>
+
+        
+        <div class="block  block-reverse">
+
+            <div class="description">
+                <div class="html-code">
+                    <code>
+                        html: <br> <br>
+                        &lt;h3 id="changeMyFontSize">Press the button below to change this text's font-size&lt;/h3> <br>
+                        &lt;button class="btn" onclick="changeFontSize()">Change!&lt;/button>
+                    </code>
+                </div>
+
+                <div class="js-code">
+                    <code>
+                        JavaScript: <br> <br>
+
+                        function changeFontSize() { <br>
+                        &nbsp;    let target = document.getElementById('changeMyFontSize'); <br>
+                        &nbsp;    target.style.fontSize = "12px"; <br>
+                        }
+                    </code>
+                </div>
+
+            </div>
+
+            <div class="action">
+                <h1>Change CSS styles</h1>
+                <h3 id="changeMyFontSize">Press the button below to change this text's font-size</h3>
+                <button class="btn" onclick="changeFontSize()">Change!</button>
+            </div>
+            
+        </div>
+
+        <div class="block">
+
+            <div class="action">
+                <h1>Hide and show elements</h1>
+                <h3 id="hideAndSeek">Press the buttons below to hide or show this text</h3>
+                <div class="buttons">
+                    <button class="btn" onclick="demoHide()">Hide</button>
+                    <button class="btn" onclick="demoShow()">Show</button>
+                </div>
+            </div>
+
+            <div class="description">
+                <textarea class="html-code" wrap="off">
+html:
+
+<div class="action">
+    <h1>Hide and show elements</h1>
+    <h3 id="hideAndSeek">Press the buttons below to hide or show this text</h3>
+    <div class="buttons">
+        <button class="btn" onclick="demoHide()">Hide</button>
+        <button class="btn" onclick="demoShow()">Show</button>
+    </div>
+</div>
+                </textarea>
+
+                <textarea class="js-code">
+function demoHide() {
+    let target = document.getElementById('hideAndSeek');
+    target.style.visibility = "hidden";
+}
+
+function demoShow() {
+    let target = document.getElementById('hideAndSeek');
+    target.style.visibility = "visible";
+}
+                </textarea>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <hr>
+
+    <footer>
+        <h6>All rights reserved &copy;</h6>
+    </footer>
+
+</div> <!-- Container ends here-->
+
+<script src="script.js"></script>
+</body>
+</html>
