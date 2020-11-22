@@ -138,6 +138,7 @@ a{
 
 
 .promotion__timer{
+  margin: 15px;
 }
 
 .promotion__timer .title{
@@ -147,7 +148,7 @@ a{
 .promotion__timer .timer{
   margin-top:60px;
   display:flex;
-  justify-content:space-between;
+  justify-content:space-evenly;
   align-items:center
 }
 
