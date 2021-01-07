@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <title>To Do List</title>
+</head>
+<body>
+    <header>
+        <a href="" class="menu__button">☰</a>
+        <h1>To Do List</h1>
+        <a href="" class="add__task__button">+</a>
+    </header>
+
+    <div class="menu__wrapper">
+        <ul class="menu">
+            <li class="menu__item"><a href="" class="menu__link">add new task</a></li>
+            <li class="menu__item"><a href="" class="menu__link">task history</a></li>
+            <li class="menu__item"><a href="" class="menu__link">settings</a></li>
+            <li class="menu__item"><a href="" class="menu__link">help</a></li>
+            <li class="menu__item"><a href="" class="menu__link">remove ads</a></li>
+        </ul>
+    </div>
+
+    <div class="add__task__window__wrapper hide">
+        <form action="" method="post">
+            <div class="add__task__window">
+
+                <div class="set__task__name hide flexbox">
+                    <h2>Give it a name:</h2>
+                    <input type="text" id="name" value="New Task">
+                    <button id="task__name__OK__button">OK</button>
+                </div>
+    
+                <div class="set__task__color hide flexbox ">
+                    <h2>Set a color</h2>
+                    <table>
+                        <tr>
+                            <th style="background-color: green"></th>
+                            <th style="background-color: red"></th>
+                            <th style="background-color: purple"></th>
+                        </tr>
+                        <tr>
+                            <th style="background-color: yellow"></th>
+                            <th style="background-color: blue"></th>
+                            <th style="background-color: pink"></th>
+                        </tr>
+                    </table>    
+                </div>
+    
+                <div class="set__task__date flexbox hide">
+                    <h2>Set the date</h2>
+                    <input type="date" name="" id="date">
+                    <button id="task__date__OK__button">OK</button>
+                </div>
+    
+                <div class="set__task__time flexbox hide">
+                    <h2>Set the time</h2>
+                    <input type="time" name="" id="time">
+                    <button id="task__time__OK__button">OK</button>
+                </div>
+    
+                <div class="set__task__notifications flexbox hide">
+                    <h2>Set notifications</h2>
+                    <ul class="notifications">
+                        <li class="notifications__item"><input type="checkbox" name="minutes" id="minutes" checked="true"><a class="notifications__link">10 minutes before event</a></li>
+                        <li class="notifications__item"><input type="checkbox" name="hour" id="hour"><a class="notifications__link">a hour before the event</a></li>
+                        <li class="notifications__item"><input type="checkbox" name="day" id="day"><a class="notifications__link">one day before the event</a></li>
+                    </ul>
+                    <button id="task__notifications__OK__button">OK</button>
+    
+                </div>
+    
+                <div class="set__task__ready flexbox hide">
+                    <h2>Done!</h2>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <main>
+        <div class="content">
+
+        </div>
+    </main>
+
+    <footer>
+        <p>2020 Simple Apps Ltd.</p>
+        <p>All right reserved</p>
+    </footer>
+    
+<script src="scripts/script.js"></script>
+</body>
+</html>

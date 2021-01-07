@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        background-color: white;
+
+        padding: 20px;
+    }
+
+    header a.menu__button {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    header a.add__task__button {
+        font-size: 40px;
+        font-weight: 700;
+        outline: none;
+        transition: transform .3s ease;
+
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .rotate {
+        transform: rotate(45deg);
+    }
+
+.menu__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+    max-height: 0px;
+
+    transition: max-height .3s ease;
+
+}
+
+.menu {
+    transform: translateY(-300px);
+    transition: transform .3s ease;
+}
+
+.show__menu {
+    transform: translateY(0);
+}
+
+.close__menu {
+    transform: translateY(-300px);
+}
+
+.menu__item {
+    text-align: center;
+    padding: 10px;
+    list-style: none;
+}
+
+.menu__item::after {
+    display: block;
+    content: "";
+    border-top: 1px solid black;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.menu__link {
+    color: black;
+    text-transform: uppercase;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+    table, th, td {
+        border: 5px solid wheat;
+        border-radius: 45px;
+        padding: 30px;
+    }
+
+    table {
+        background-color: white;
+    }
+
+    .flexbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .task__color {
+        border-radius: 45px;
+        padding: 10px 11px;
+    }
+
+    .flexbox h2 {
+        padding: 10px;
+    }
+
+    .flexbox input {
+        outline: none;
+        border-radius: 25px;
+        border: 2px solid black;
+
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .flexbox button {
+        outline: none;
+        border-radius: 25px;
+        padding: 10px;
+        margin: 10px;
+        width: 75px;
+        background-color: pink;
+    }
+
+    .flexbox .notifications__item {
+        list-style: none;
+        text-align: center;
+        padding: 5px;
+
+    }
+
+    .flexbox .notifications__item::after {
+        display: block;
+        content: "";
+        border-top: 1px solid black;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .flexbox .notifications__link {
+        text-decoration: none;
+        color: black;
+        text-transform: uppercase;
+        font-weight: 400;
+    }
+
+    .set__task__ready {
+        transition: opacity 5s linear;
+    }
+
+.task {
+    display: flex;
+    flex-direction: row;    
+    justify-content: space-between;
+
+    padding: 10px;
+    
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.hide {
+    display: none;
+}
+
+.vanish {
+    opacity: 0;
+}
+
+    footer {
+        position: absolute;
+        bottom: 0;
+
+        text-align: center;
+
+        width: 100%;
+    }
