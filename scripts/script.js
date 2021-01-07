@@ -87,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
             name = task__name__input.value;
-            console.log(`Task name is ${name}`);
 
             set__task__name.classList.toggle("hide");
             set__task__color.classList.toggle("hide");
@@ -97,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
         task__colors.forEach(item => {
             item.addEventListener("click", (event) => {
                 color = event.target.style.backgroundColor;
-                console.log(`Task color is ${color}`);
 
                 set__task__color.classList.toggle("hide");
                 set__task__date.classList.toggle("hide");
@@ -121,7 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             date = task__date__input.value;
             date = date[8] + date[9] + '.' + date[5] + date[6];
-            console.log(`Task date is ${date}`);
 
             set__task__date.classList.toggle("hide");
             set__task__time.classList.toggle("hide");
@@ -131,7 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
             time = task__time__input.value;
-            console.log(`Task time is ${time}`);
 
             set__task__time.classList.toggle("hide");
             set__task__notifications.classList.toggle("hide");
@@ -145,18 +141,10 @@ document.addEventListener("DOMContentLoaded", () => {
             notification_1hour = notifications[1].checked;
             notification_1day = notifications[2].checked;
 
-            console.log(`Task notification 10 min is ${notification_10min}`);
-            console.log(`Task notification 1 hour is ${notification_1hour}`);
-            console.log(`Task notification 1 day is ${notification_1day}`);
-
             set__task__notifications.classList.toggle("hide");
             set__task__ready.classList.toggle("hide");
 
             //task = new Task(name, color, date, time, notification_10min, notification_1hour, notification_1day);
-
-
-
-
 
             task = document.createElement("div");
             task.innerHTML = `
@@ -177,10 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="task__time">
                         <p>${time}</p>
                     </div>
-
-                    <div class="task__status">
-                        <input class="done" type="radio">
-                    </div>
                 </div>
                 <hr>
             `
@@ -197,5 +181,14 @@ document.addEventListener("DOMContentLoaded", () => {
             // }, 5000);
 
         });
+
+        //DELETE TASK
+        // const delete__task__button = document.querySelectorAll(".delete__task__button");
+
+        // delete__task__button.forEach(item => {
+        //     item.addEventListener("click", (event) => {
+        //         console.log("123");
+        //     })
+        // });
         
 });

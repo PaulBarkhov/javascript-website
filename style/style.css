@@ -129,7 +129,8 @@ a {
         padding: 10px;
         margin: 10px;
         width: 75px;
-        background-color: pink;
+
+        font-weight: 700;
     }
 
     .flexbox .notifications__item {
@@ -161,12 +162,34 @@ a {
 .task {
     display: flex;
     flex-direction: row;    
-    justify-content: space-between;
+    justify-content: safe;
 
     padding: 10px;
     
     font-size: 20px;
     font-weight: 500;
+}
+
+.task div {
+    margin-right: 14px;
+}
+
+.task__name {
+    width: 150px;
+}
+
+.task__text {
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.delete p {
+    position: absolute;
+    right: 15px;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .hide {
@@ -178,6 +201,7 @@ a {
 }
 
     footer {
+        padding-bottom: 10px;
         position: absolute;
         bottom: 0;
 
