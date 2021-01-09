@@ -1,10 +1,12 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
     box-sizing: border-box;
+    background-color: rgb(194, 194, 194);
 }
 
 a {
@@ -19,7 +21,11 @@ a {
 
         background-color: white;
 
-        padding: 20px;
+        padding: 8px;
+
+        margin-bottom: 10px;
+
+        border-bottom: 1px solid rgb(110, 110, 110);
     }
 
     header a.menu__button {
@@ -34,6 +40,10 @@ a {
         transition: transform .3s ease;
 
         -webkit-tap-highlight-color: transparent;
+    }
+
+    #toDo {
+        text-transform: uppercase;
     }
 
     .rotate {
@@ -56,6 +66,8 @@ a {
 .menu {
     transform: translateY(-300px);
     transition: transform .3s ease;
+    width: 100%;
+
 }
 
 .show__menu {
@@ -70,15 +82,19 @@ a {
     text-align: center;
     padding: 10px;
     list-style: none;
+    background-color: rgb(255, 255, 255);
+
+    border-bottom: 1px solid rgb(173, 173, 173);
+    border-top: 1px solid rgb(172, 172, 172);
 }
 
-.menu__item::after {
+/* .menu__item::after {
     display: block;
     content: "";
     border-top: 1px solid black;
     width: 100%;
     margin: 0 auto;
-}
+} */
 
 .menu__link {
     color: black;
@@ -88,13 +104,15 @@ a {
     font-weight: 700;
 }
 
-    table, th, td {
+    .set__task__color table, 
+    .set__task__color th, 
+    .set__task__color td {
         border: 5px solid wheat;
         border-radius: 45px;
         padding: 30px;
     }
 
-    table {
+    .set__task__color table {
         background-color: white;
     }
 
@@ -107,7 +125,10 @@ a {
 
     .task__color {
         border-radius: 45px;
-        padding: 10px 11px;
+        border-color: rgb(110, 110, 110);
+        padding: 0px 6px;
+        height: 12px;
+        transform: translateY(5px);
     }
 
     .flexbox h2 {
@@ -164,7 +185,12 @@ a {
     flex-direction: row;    
     justify-content: safe;
 
+    background-color: rgb(255, 255, 255);
+
     padding: 10px;
+
+    border-bottom: 1px solid rgb(110, 110, 110);
+    border-top: 1px solid rgb(110, 110, 110);
     
     font-size: 20px;
     font-weight: 500;
@@ -209,3 +235,75 @@ a {
 
         width: 100%;
     }
+
+/* CALENDAR */
+
+.calendar {
+    border-bottom: 1px solid rgb(138, 137, 137);
+    background-color:rgb(175, 175, 175)
+}
+
+.calendarHeader {
+    display: flex;
+    justify-content: center;
+
+    padding: 5px 10px;
+}
+
+.calendarHeader a,
+.calendarHeader p {
+    flex: 33%;
+}
+
+.calendar__previousMonth {
+    text-align: left;
+}
+
+.calendar__currentMonth {
+    text-align: center;
+}
+
+.calendar__nextMonth {
+    text-align: right;
+}
+
+.calendar .calendar__activeDay {
+    background: green;
+    border-radius: 45px;
+    color: white;
+}
+
+.calendar .calendar__anotherMonth {
+    color: grey;
+    background-color: rgb(187, 186, 186);
+}
+
+.calendar__weekdays {
+    background-color: rgb(160, 160, 160);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.calendar__weekdays div {
+    height: 20px;
+    width: 14%;
+}
+
+.days {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.days div {
+    height: 20px;
+    width: 14%;
+}
