@@ -23,22 +23,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    //TASK OBJECT
-    function Task(name, color, date, time, notification_10min, notification_1hour, notification_1day) {
-        this.name = name;
-        this.color = color;
-        this.date = date;
-        this.time = time;
-        this.notification_10min = notification_10min;
-        this.notification_1hour = notification_1hour;
-        this.notification_1day = notification_1day;
-    };
+
+
+
+
+
+
+
+
 
 
     //ADD TASK
     const toDo = document.querySelector('#toDo'),
         
           add__task__button = document.querySelector(".add__task__button"),
+          main = document.querySelector("main"),
+          setDate = document.querySelector(".setDate"),
+          calendar = document.querySelector(".calendar"),
           content = document.querySelector(".content"),
           add__task__window__wrapper = document.querySelector(".add__task__window__wrapper"),
           
@@ -49,11 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
           set__task__color = document.querySelector(".set__task__color"),
           task__colors = document.querySelectorAll("th"),
 
-          set__task__date = document.querySelector(".set__task__date"),
-          task__date__OK__button = document.querySelector("#task__date__OK__button"),
-          task__date__input = document.querySelector("#date"),
-
-
           set__task__time = document.querySelector(".set__task__time"),
           task__time__OK__button = document.querySelector("#task__time__OK__button"),
           task__time__input = document.querySelector("#time"), 
@@ -61,8 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
           set__task__notifications = document.querySelector(".set__task__notifications"),
           task__notifications__OK__button = document.querySelector("#task__notifications__OK__button"),
           
-          notifications = set__task__notifications.querySelectorAll("input"),
-          set__task__ready = document.querySelector(".set__task__ready");
+          notifications = set__task__notifications.querySelectorAll("input");
 
     let name = "New task",
         color = "blue",
@@ -72,80 +67,121 @@ document.addEventListener("DOMContentLoaded", () => {
         notification_1hour = false,
         notification_1day = false;
 
-    add__task__button.addEventListener("click", () => {toggleAddTask()} );
 
-    function toggleAddTask() {
+    function toggleMain() {
+        main.classList.toggle("hide"); 
+        add__task__window__wrapper.classList.toggle("hide");
+    }
+
+    function toggleContent() {
+        content.classList.toggle("hide");
+    }
+
+    function toggleHeader() {
         event.preventDefault();
 
         add__task__button.classList.toggle("rotate");
 
-        add__task__window__wrapper.classList.toggle("hide");
-        content.classList.toggle("hide"); 
-        
-        if (set__task__name.classList.contains("hide")) {
-            set__task__name.classList.toggle("hide");
+        if (toDo.innerHTML == "To Do List") {
             toDo.innerHTML = "New task";
         }
         else {
             toDo.innerHTML = "To Do List";
-            set__task__name.classList.toggle("hide");
+            hideTaskName();
+            if (!set__task__color.classList.contains("hide")) {
+                toggleTaskColor();
+            }
+            if (!set__task__time.classList.contains("hide")) {
+                toggleTaskTime();
+            }
+            if (!set__task__notifications.classList.contains("hide")) {
+                toggleTaskNotifications();
+            }
         }
     }
+
+    function toggleTaskName() {
+        set__task__name.classList.toggle("hide");
+    };
+
+    function showTaskName() {
+        set__task__name.classList.remove("hide");
+        task__name__input.focus();
+    }
+
+    function hideTaskName() {
+        set__task__name.classList.add("hide");
+    }
+
+    function toggleTaskColor() {
+        set__task__color.classList.toggle("hide");
+    }
+
+    function toggleTaskDate() {
+        set__task__time.classList.toggle("hide");
+    }
+
+    function toggleTaskTime() {
+        set__task__time.classList.toggle("hide");
+    }
+
+    function toggleTaskNotifications() {
+        set__task__notifications.classList.toggle("hide");
+    }
+
+    add__task__button.addEventListener("click", () => {
+        toggleMain();
+        toggleHeader();
+        showTaskName();
+    });
 
     task__name__OK__button.addEventListener("click", (event) => {
         event.preventDefault();
 
         name = task__name__input.value;
-
-        set__task__name.classList.toggle("hide");
-        set__task__color.classList.toggle("hide");
         task__name__input.value = "New Task";
+
+        hideTaskName();
+        toggleTaskColor();
     });
+
 
     task__colors.forEach(item => {
         item.addEventListener("click", (event) => {
             color = event.target.style.backgroundColor;
 
-            set__task__color.classList.toggle("hide");
+            toggleTaskColor();
+
             if (date == "") {
-                set__task__date.classList.toggle("hide");
+                toggleMain();
+                toggleContent();
+                setDate.classList.toggle("hide");
             }
             else {
-                set__task__time.classList.toggle("hide");
+                toggleTaskTime();
             }
         });
     });
-
-    task__date__OK__button.addEventListener("click", (event) => {
-        event.preventDefault();
-
-        set__task__date.classList.toggle("hide");
-        set__task__time.classList.toggle("hide");
-    })
 
     task__time__OK__button.addEventListener("click", (event) => {
         event.preventDefault();
 
         time = task__time__input.value;
-
-        set__task__time.classList.toggle("hide");
-        set__task__notifications.classList.toggle("hide");
         task__time__input.value = "";
+
+        toggleTaskTime();
+        toggleTaskNotifications();
     });
 
     task__notifications__OK__button.addEventListener("click", (event) => {
         event.preventDefault();
 
-        toDo.innerHTML = "To Do List";
+        toggleHeader();
+        toggleMain();
 
         notification_10min = notifications[0].checked;
         notification_1hour = notifications[1].checked;
         notification_1day = notifications[2].checked;
-
-        set__task__notifications.classList.toggle("hide");
-        set__task__ready.classList.toggle("hide");
-
-        //task = new Task(name, color, date, time, notification_10min, notification_1hour, notification_1day);
 
         task = document.createElement("div");
         task.innerHTML = `
@@ -170,26 +206,13 @@ document.addEventListener("DOMContentLoaded", () => {
         content.append(task);
 
         date = "";
-        set__task__ready.classList.toggle("hide");
-        content.classList.toggle("hide");
-        add__task__window__wrapper.classList.toggle("hide");
-        add__task__button.classList.toggle("rotate");
-
-        // setTimeout(() => {
-        //     set__task__ready.classList.toggle("hide");
-        //     content.classList.toggle("hide");
-        // }, 5000);
-
     });
 
-    //DELETE TASK
-    // const delete__task__button = document.querySelectorAll(".delete__task__button");
 
-    // delete__task__button.forEach(item => {
-    //     item.addEventListener("click", (event) => {
-    //         console.log("123");
-    //     })
-    // });
+
+
+
+
 
 
     //CALENDAR 
@@ -282,6 +305,11 @@ document.addEventListener("DOMContentLoaded", () => {
     calendar__days.addEventListener("click", (event) => {
         if (!event.target.classList.contains("days")) {
             myFunction(event.target.innerHTML);
+            let asd = days.querySelectorAll("div");
+            asd.forEach(item => {
+                item.classList.remove("calendar__activeDay");
+            })
+            event.target.classList.add("calendar__activeDay");
         }
     });
 
@@ -290,7 +318,13 @@ document.addEventListener("DOMContentLoaded", () => {
             clickedDay = "0" + clickedDay;
         }
         date = clickedDay + "." + exportMonth;
-        toggleAddTask();
+
+        if (content.classList.contains('hide')) {
+            toggleMain();
+            toggleTaskTime();
+            toggleContent();
+            setDate.classList.toggle("hide");
+        }
     };
                 
 });
