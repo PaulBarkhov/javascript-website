@@ -8,9 +8,9 @@
 </head>
 <body>
     <header>
-        <a href="" class="menu__button">☰</a>
+        <a class="menu__button">☰</a>
         <h2 id="toDo">To Do List</h2>
-        <a href="" class="add__task__button">+</a>
+        <a class="add__task__button">➕</a>
     </header>
 
     <div class="menu__wrapper">
@@ -24,16 +24,16 @@
     </div>
 
     <div class="add__task__window__wrapper hide">
-        <form action="" method="post">
             <div class="add__task__window">
 
-                <div class="set__task__name hide flexbox">
-                    <h2>Give it a name:</h2>
-                    <input type="text" id="name" value="New Task">
-                    <button id="task__name__OK__button">OK</button>
+                <div class="set__task__name taskBox hide">    
+                    <div>
+                        <input placeholder="Give it a name" type="text" id="name">
+                        <button id="task__name__OK__button">OK</button>
+                    </div>
                 </div>
-    
-                <div class="set__task__color hide flexbox ">
+
+                <div class="set__task__color taskBox hide">
                     <h2>Set a color</h2>
                     <table>
                         <tr>
@@ -48,35 +48,49 @@
                         </tr>
                     </table>    
                 </div>
-    
-                <div class="set__task__date flexbox hide">
+
+                <div class="set__task__date taskBox hide">
                     <h2>Set the date</h2>
                     <input type="date" name="" id="date">
-                    <button id="task__date__OK__button">OK</button>
+                    <div>
+                        <button id="task__date__OK__button">OK</button>
+                    </div>
+                    <button id="task__date__skip__button">SKIP</button>
+
                 </div>
-    
-                <div class="set__task__time flexbox hide">
+
+                <div class="set__task__time hide taskBox">
                     <h2>Set the time</h2>
-                    <input type="time" name="" id="time">
-                    <button id="task__time__OK__button">OK</button>
+                    <div class="clock">
+                        <div class="hours">12</div>
+                        :
+                        <div class="minutes">30</div>
+                    </div>
+
+                    <div>
+                        <button id="task__time__OK__button">OK</button>
+                        <button id="task__date__skip__button">SKIP</button>
+                    </div>
+
+
+
                 </div>
-    
-                <div class="set__task__notifications flexbox hide">
+
+                <div class="set__task__notifications taskBox hide">
                     <h2>Set notifications</h2>
                     <ul class="notifications">
-                        <li class="notifications__item"><input type="checkbox" name="minutes" id="minutes" checked="true"><a class="notifications__link">10 minutes before event</a></li>
-                        <li class="notifications__item"><input type="checkbox" name="hour" id="hour"><a class="notifications__link">a hour before the event</a></li>
-                        <li class="notifications__item"><input type="checkbox" name="day" id="day"><a class="notifications__link">one day before the event</a></li>
+                        <hr>
+                        <li class="notifications__item"><input type="checkbox" name="minutes" id="minutes" checked="true"><label for="minutes" class="notifications__link">10 minutes before event</label></li>
+                        <hr>
+                        <li class="notifications__item"><input type="checkbox" name="hour" id="hour"><label for="hour" class="notifications__link">One hour before the event</label></li>
+                        <hr>
+                        <li class="notifications__item"><input type="checkbox" name="day" id="day"><label for="day" class="notifications__link">One day before the event</label></li>
+                        <hr>
                     </ul>
                     <button id="task__notifications__OK__button">OK</button>
-    
-                </div>
-    
-                <div class="set__task__ready flexbox hide">
-                    <h2>Done!</h2>
+
                 </div>
             </div>
-        </form>
     </div>
 
     <main>

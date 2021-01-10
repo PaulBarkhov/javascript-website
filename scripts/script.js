@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+    let currentDate = new Date(),
+        modifiedDate = currentDate,
+        months = ["Januar", "Februar", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 
     //HAMBURGER MENU
     const menu__button = document.querySelector(".menu__button")
@@ -51,7 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
           task__colors = document.querySelectorAll("th"),
 
           set__task__time = document.querySelector(".set__task__time"),
+          clock = document.querySelector(".clock"),
+          clockHours = clock.querySelector(".hours"),
+          clockMinutes = clock.querySelector(".minutes"),
           task__time__OK__button = document.querySelector("#task__time__OK__button"),
+          task__date__skip__button = document.querySelector("#task__date__skip__button"),
           task__time__input = document.querySelector("#time"), 
 
           set__task__notifications = document.querySelector(".set__task__notifications"),
@@ -97,14 +105,17 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!set__task__notifications.classList.contains("hide")) {
                 toggleTaskNotifications();
             }
+            modifiedDate = currentDate;
         }
     }
 
     function toggleTaskName() {
+        name = "New task";
         set__task__name.classList.toggle("hide");
     };
 
     function showTaskName() {
+        name = "New task";
         set__task__name.classList.remove("hide");
         task__name__input.focus();
     }
@@ -123,6 +134,76 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function toggleTaskTime() {
         set__task__time.classList.toggle("hide");
+        buildClock();
+    }
+
+    function buildClock() {
+        let hours = currentDate.getHours();
+        let minutes = currentDate.getMinutes();
+
+        if (hours < 10) {
+            clockHours.innerHTML = "0" + hours;
+        }
+        else {
+            clockHours.innerHTML = hours;
+        }
+        
+        if (minutes < 10) {
+            clockMinutes.innerHTML = "0" + minutes;
+        }
+        else {
+            clockMinutes.innerHTML = minutes;
+        }
+
+        clockHours.addEventListener("click", () => {
+
+            if (hours < 23) {
+                hours++;
+            }
+            else {
+                hours = 0;
+            }
+
+            if (hours < 10) {
+                clockHours.innerHTML = "0" + hours;
+            }
+            else {
+                clockHours.innerHTML = hours;
+            }
+            
+            if (minutes < 10) {
+                clockMinutes.innerHTML = "0" + minutes;
+            }
+            else {
+                clockMinutes.innerHTML = minutes;
+            }
+
+        });
+
+        clockMinutes.addEventListener("click", () => {
+
+            if (minutes < 59) {
+                minutes++;
+            }
+            else {
+                minutes = 0;
+            }      
+            
+            if (hours < 10) {
+                clockHours.innerHTML = "0" + hours;
+            }
+            else {
+                clockHours.innerHTML = hours;
+            }
+            
+            if (minutes < 10) {
+                clockMinutes.innerHTML = "0" + minutes;
+            }
+            else {
+                clockMinutes.innerHTML = minutes;
+            }
+
+        });
     }
 
     function toggleTaskNotifications() {
@@ -138,8 +219,13 @@ document.addEventListener("DOMContentLoaded", () => {
     task__name__OK__button.addEventListener("click", (event) => {
         event.preventDefault();
 
-        name = task__name__input.value;
-        task__name__input.value = "New Task";
+        if (task__name__input.value == "") {
+            task__name__input.value = "New Task";
+        }
+        else {
+            name = task__name__input.value;
+        }
+        task__name__input.value = "";
 
         hideTaskName();
         toggleTaskColor();
@@ -166,9 +252,17 @@ document.addEventListener("DOMContentLoaded", () => {
     task__time__OK__button.addEventListener("click", (event) => {
         event.preventDefault();
 
-        time = task__time__input.value;
-        task__time__input.value = "";
+        modifiedDate = currentDate;
 
+        time = clockHours.innerHTML + ":" + clockMinutes.innerHTML;
+
+        toggleTaskTime();
+        toggleTaskNotifications();
+    });
+
+    task__date__skip__button.addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log("fsdfsdf");
         toggleTaskTime();
         toggleTaskNotifications();
     });
@@ -204,8 +298,6 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `
         content.append(task);
-
-        date = "";
     });
 
 
@@ -221,9 +313,6 @@ document.addEventListener("DOMContentLoaded", () => {
           calendar__nextMonth = document.querySelector(".calendar__nextMonth"),
           calendar__days = document.querySelector(".calendar__days");
 
-          currentDate = new Date();
-          months = ["Januar", "Februar", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        
     let days,
         exportMonth;
 
