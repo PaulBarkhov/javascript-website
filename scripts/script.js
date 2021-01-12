@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         task = document.createElement("div");
         task.innerHTML = `
-            <div class="task">
+            <div class="task glass">
                 <div style="background-color: ${color}" class="task__color">
                     <a href=""></a>
                 </div>
