@@ -242,11 +242,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     add__task__button.addEventListener("click", () => {
+        if (content.classList.contains("hide")) {
+            content.classList.toggle("hide");
+            toggleHeader();
+            setDate.classList.toggle("hide");
+        }
+        else {
             toggleMain();
             toggleHeader();
             showTaskName();
             hideMenu();
             date = "";
+        }
     });
 
     task__name__OK__button.addEventListener("click", (event) => {
@@ -274,6 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (date == "") {
                 toggleMain();
                 toggleContent();
+                setDate.classList.toggle("hide");
             }
             else {
                 toggleTaskTime();
