@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style/style.css">
     <title>To Do List</title>
 </head>
-<body>
+<body class="brightMode">
     <header class="glass">
         <a class="menu__button">☰</a>
         <h2 id="toDo">To Do List</h2>
@@ -15,11 +15,11 @@
 
     <div class="menu__wrapper">
         <ul class="menu">
-            <li class="menu__item"><a href="" class="menu__link">add new task</a></li>
-            <li class="menu__item"><a href="" class="menu__link">task history</a></li>
-            <li class="menu__item"><a href="" class="menu__link">settings</a></li>
-            <li class="menu__item"><a href="" class="menu__link">help</a></li>
-            <li class="menu__item"><a href="" class="menu__link">remove ads</a></li>
+            <li class="menu__item glass" id="menu__addNewTaskButton">add new task</li>
+            <li class="menu__item glass">task history</li>
+            <li class="menu__item glass">settings</li>
+            <li class="menu__item glass">help</li>
+            <li class="menu__item glass" id="menu__darkModeButton">Dark Mode</li>
         </ul>
     </div>
 
@@ -28,7 +28,7 @@
 
                 <div class="set__task__name taskBox hide">    
                     <div>
-                        <input placeholder="Give it a name" type="text" id="name" class="glass">
+                        <input autocomplete="off" placeholder="Give it a name" type="text" id="name" class="glass">
                         <button id="task__name__OK__button" class="glass">OK</button>
                     </div>
                 </div>

@@ -3,38 +3,55 @@ document.addEventListener("DOMContentLoaded", () => {
         modifiedDate = currentDate,
         months = ["Januar", "Februar", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+    const body = document.querySelector("body");
 
     //HAMBURGER MENU
     const menu__button = document.querySelector(".menu__button")
           menu__wrapper = document.querySelector(".menu__wrapper"),
-          menu = document.querySelector(".menu");
+          menu = document.querySelector(".menu"),
+
+          menu__darkModeButton = document.querySelector("#menu__darkModeButton");
+
+    function showMenu() {
+        menu.classList.add("show__menu");
+        menu.classList.remove("close__menu");
+        menu__wrapper.style.maxHeight = "300px";
+    }
+
+    document.addEventListener("click", (event) => {
+        console.log(event.target);
+        if (!menu.contains(event.target) && !menu__button.contains(event.target)) {
+            hideMenu();
+        }
+    })
+
+    function hideMenu() {
+        menu.classList.remove("show__menu");
+        menu.classList.add("close__menu");
+        menu__wrapper.style.maxHeight = "0px";
+    }
 
     menu__button.addEventListener('click', (event) => {
         event.preventDefault();
         if (menu.classList.contains("show__menu")) {
-            // menu__wrapper.classList.add("hide");
-            // menu__wrapper.classList.remove("show");
-            menu.classList.remove("show__menu");
-            menu.classList.add("close__menu");
-            menu__wrapper.style.maxHeight = "0px";
+            hideMenu();
         }
         else {
-            // menu__wrapper.classList.add("show");
-            // menu__wrapper.classList.remove("hide");
-            menu.classList.add("show__menu");
-            menu.classList.remove("close__menu");
-            menu__wrapper.style.maxHeight = "300px";
+            showMenu();
         }
     });
 
+    menu__darkModeButton.addEventListener("click", () => {
+        body.classList.toggle("brightMode");
+        body.classList.toggle("darkMode");
 
-
-
-
-
-
-
-
+        if (menu__darkModeButton.innerHTML == "Dark Mode") {
+            menu__darkModeButton.innerHTML = "Bright Mode";
+        }
+        else {
+            menu__darkModeButton.innerHTML = "Bright Mode";
+        }
+    });
 
 
     //ADD TASK
@@ -211,9 +228,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     add__task__button.addEventListener("click", () => {
-        toggleMain();
-        toggleHeader();
-        showTaskName();
+            toggleMain();
+            toggleHeader();
+            showTaskName();
+            hideMenu();
     });
 
     task__name__OK__button.addEventListener("click", (event) => {
