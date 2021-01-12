@@ -5,7 +5,7 @@
 }
 
 body {
-    overflow: hidden;
+    overflow-x: hidden;
     padding: 10px;
     box-sizing: border-box;
     font-weight: 400;
@@ -165,14 +165,17 @@ a {
     /* TASK BOX */
     .taskBox {
         width: calc(100% - 20px);
-        height: 350px;
+        height: 30vh;
+        max-height: 250px;
         padding: 10px;
         border-radius: 5px;
 
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
+
+        position: relative;
     }
 
     .taskBox h2 {
@@ -193,7 +196,8 @@ a {
         height: 18px;
         width: 200px;
 
-        margin-bottom: 30px;
+        margin-top: 20px;
+        margin-bottom: 40px;
     }
 
     .set__task__name #task__name__OK__button {
@@ -211,12 +215,12 @@ a {
     /* SET TASK COLOR */
 
     .set__task__color table {
-        width: 300px;
-        border-spacing: 30px;
+        width: 240px;
+        border-spacing: 20px;
     }
  
     .set__task__color th {
-        padding: 40px;
+        padding: 30px;
         overflow: hidden;
         border-radius: 50px;
         opacity: 0.9;
@@ -241,7 +245,7 @@ a {
         border-color: rgb(110, 110, 110);
         padding: 0px 6px;
         height: 12px;
-        transform: translateY(5px);
+        transform: translateY(10px);
     }
 
     /* SET TASK TIME */
@@ -343,37 +347,125 @@ a {
 
 
 .task {
-    display: flex;
-    flex-direction: row;    
-    border-radius: 5px;
+    height: 270px;
+
+    max-height: 30px;
+
+    transition: max-height 0.3s ease;
+    margin-bottom: 10px;
 
 
     padding: 10px;
     
     font-size: 20px;
     font-weight: 500;
+
+    overflow: hidden;
 }
 
-.task div {
-    margin-right: 14px;
+.taskMain {
+    display: flex;
+    flex-direction: row;    
+    border-radius: 5px;
+
+    position: relative;
 }
+
+.taskExpanded {
+    max-height: 270px;
+}
+
 
 .task__name {
-    width: 150px;
-}
-
-.task__text {
+    margin-left: 5px;
     width: 150px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.delete p {
+.task__time {
     position: absolute;
-    right: 15px;
-    font-size: 20px;
-    font-weight: 700;
+    right: 5px;
+}
+.task__date {
+    position: absolute;
+    right: 65px;
+}
+
+.task__notifications {
+    margin: 15px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.287);
+    border: 1px solid black;
+
+    position: absolute;
+    right: 0;
+
+    height: 75%;
+    width: 60px;
+
+    font-size: 16px;
+
+    text-align: center;
+}
+
+.task__notifications p {
+    padding: 5px;
+}
+
+.task__notifications .switch {
+    width: 40px;
+    display: inline-block;
+    position: relative;
+
+    margin-bottom: 10px;
+}
+
+.task__notifications .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.task__notifications .slider {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 40px;
+    height: 100%;
+
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.37);
+
+    background-color: grey;
+
+    transition: .3s ease;
+}
+
+.task__notifications .slider::before {
+    display: inline-block;
+    content: "";
+
+    position: absolute;
+    left: 3px;
+    top: 3px;
+
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    background-color: white;
+
+    transition: .3s ease;
+}
+
+.task__notifications .switch input:checked + .slider {
+    background-color: red;
+}
+
+.task__notifications .switch input:checked + .slider::before {
+    transform: translate(19px);
 }
 
 .hide {
@@ -395,6 +487,7 @@ a {
 .calendar {
     border-radius: 5px;
     margin-bottom: 10px;
+    font-weight: 500;
 }
 
 .calendarHeader {

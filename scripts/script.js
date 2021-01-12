@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.addEventListener("click", (event) => {
-        console.log(event.target);
         if (!menu.contains(event.target) && !menu__button.contains(event.target)) {
             hideMenu();
         }
@@ -103,9 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
         color = "blue",
         date = "",
         time = "",
-        notification_10min = true,
-        notification_1hour = false,
-        notification_1day = false;
+        notification_10min,
+        notification_1hour,
+        notification_1day;
 
 
     function toggleMain() {
@@ -247,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
             toggleHeader();
             showTaskName();
             hideMenu();
+            date = "";
     });
 
     task__name__OK__button.addEventListener("click", (event) => {
@@ -306,32 +306,93 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleHeader();
         toggleMain();
 
-        notification_10min = notifications[0].checked;
-        notification_1hour = notifications[1].checked;
-        notification_1day = notifications[2].checked;
+        if (notifications[0].checked == true) {
+            notification_10min = "checked";
+        }
+        else {
+            notification_10min = "";
+        }
+
+        if (notifications[1].checked == true) {
+            notification_1hour = "checked";
+        }
+        else {
+            notification_1hour = "";
+        }
+
+        if (notifications[2].checked == true) {
+            notification_1day = "checked";
+        }
+        else {
+            notification_1day = "";
+        }
 
         task = document.createElement("div");
         task.innerHTML = `
             <div class="task glass">
-                <div style="background-color: ${color}" class="task__color">
-                    <a href=""></a>
+
+                <div class="taskMain">
+                    <div style="background: ${color}" class="task__color"></div>
+
+                    <div class="task__name">${name}</div>
+
+                    <div class="task__date">${date}</div>
+                    
+                    <div class="task__time">${time}</div>
                 </div>
 
-                <div class="task__name">
-                    <p class="task__text">${name}</p>
-                </div>
+                <div class="taskExpanded">
+                    <div class="task__notifications">
+                        🔔
+                        <p>1 day</p>
 
-                <div class="task__date">
-                    <p>${date}</p>
+                        <label class="switch">
+                            <input type="checkbox" ${notification_1day}>
+                            <span class="slider"></span>
+                        </label>
+
+                        <hr>
+
+                        <p>1 hour</p>
+                        
+                        <label class="switch">
+                            <input type="checkbox" ${notification_1hour}>
+                            <span class="slider"></span>
+                        </label>
+
+                        <hr>
+
+                        <p>10 min</p>
+
+                        <label class="switch">
+                            <input type="checkbox" ${notification_10min}>
+                            <span class="slider"></span>
+                        </label>                  
                 </div>
                 
-                <div class="task__time">
-                    <p>${time}</p>
-                </div>
             </div>
         `
         content.append(task);
+
+        task.addEventListener("click", (event) => {
+            //event.target.parentNode.classList.toggle("taskExpanded");
+            console.log(event.target);
+
+            if (event.target.classList.contains("task__name") || event.target.classList.contains("task__date") || event.target.classList.contains("task__time")) {
+                event.target.parentElement.parentElement.classList.toggle("taskExpanded");
+            }
+            if (event.target.classList.contains("taskMain")) {
+                event.target.parentElement.classList.toggle("taskExpanded");
+            }
+            else {
+                event.target.classList.toggle("taskExpanded");
+            }
+        });
     });
+
+
+
+
 
 
 
