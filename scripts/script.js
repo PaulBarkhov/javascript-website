@@ -274,7 +274,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (date == "") {
                 toggleMain();
                 toggleContent();
-                setDate.classList.toggle("hide");
             }
             else {
                 toggleTaskTime();
@@ -374,9 +373,13 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         content.append(task);
 
+        const noTasksMessage = content.querySelector(".noTasksMessage");
+        if (noTasksMessage) {
+            noTasksMessage.remove();
+        }
+
         task.addEventListener("click", (event) => {
             //event.target.parentNode.classList.toggle("taskExpanded");
-            console.log(event.target);
 
             if (event.target.classList.contains("task__name") || event.target.classList.contains("task__date") || event.target.classList.contains("task__time")) {
                 event.target.parentElement.parentElement.classList.toggle("taskExpanded");
@@ -487,27 +490,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
     calendar__days.addEventListener("click", (event) => {
         if (!event.target.classList.contains("days")) {
-            myFunction(event.target.innerHTML);
-            let asd = days.querySelectorAll("div");
-            asd.forEach(item => {
+
+            const tasks = content.querySelectorAll("div");
+
+            if (tasks.length == 0) {
+                const noTasksMessage = document.createElement("div");
+                noTasksMessage.setAttribute("class", "noTasksMessage glass");
+
+                noTasksMessage.innerHTML = `
+                    <h1> There are no tasks yet</h1>
+                    <button>Add</button>
+                `;
+
+                content.append(noTasksMessage);
+
+                const addButton = noTasksMessage.querySelector("button");
+
+                addButton.addEventListener("click", () => {
+                    toggleMain();
+                    toggleHeader();
+                    showTaskName();
+                    hideMenu();
+                    date = "";
+                });
+            }
+
+
+
+            let clickedDay = event.target.innerHTML;
+    
+            if (content.classList.contains('hide')) {
+                
+                if (clickedDay < 10) {
+                    clickedDay = "0" + clickedDay;
+                }
+                date = clickedDay + "." + exportMonth;
+
+                toggleMain();
+                toggleTaskTime();
+                toggleContent();
+                setDate.classList.toggle("hide");
+            }
+
+            days.querySelectorAll("div").forEach(item => {
                 item.classList.remove("calendar__activeDay");
             })
             event.target.classList.add("calendar__activeDay");
         }
     });
-
-    function myFunction(clickedDay) {
-        if (clickedDay < 10) {
-            clickedDay = "0" + clickedDay;
-        }
-        date = clickedDay + "." + exportMonth;
-
-        if (content.classList.contains('hide')) {
-            toggleMain();
-            toggleTaskTime();
-            toggleContent();
-            setDate.classList.toggle("hide");
-        }
-    };
                 
 });

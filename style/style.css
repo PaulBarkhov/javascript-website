@@ -15,6 +15,18 @@ body {
     background-size: cover;
 }
 
+button {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.555);
+    outline: none;
+    border: 1px solid rgb(167, 167, 167);
+    border-radius: 5px;
+    padding: 10.5px;
+    width: 75px;
+
+    font-weight: 700;
+}
+
 /* body::before {
     content: "";
     position: absolute;
@@ -200,18 +212,6 @@ a {
         margin-bottom: 40px;
     }
 
-    .set__task__name #task__name__OK__button {
-        color: black;
-        background-color: rgba(255, 255, 255, 0.555);
-        outline: none;
-        border: 1px solid rgb(167, 167, 167);
-        border-radius: 5px;
-        padding: 10.5px;
-        width: 75px;
-
-        font-weight: 700;
-    }
-
     /* SET TASK COLOR */
 
     .set__task__color table {
@@ -289,18 +289,6 @@ a {
             text-align: center;
         }
 
-    .set__task__time button {
-        color: black;
-        background-color: rgba(255, 255, 255, 0.555);
-        outline: none;
-        border: 1px solid rgba(41, 189, 27, 0.178);
-        border-radius: 5px;
-        padding: 10.5px;
-        width: 75px;
-
-        font-weight: 700;
-    }
-
     /* SET TASK NOTIFICATIONS */
     .set__task__notifications {
         align-items: center;
@@ -331,25 +319,34 @@ a {
     }
 
     .set__task__notifications button {
-        color: black;
-        background-color: rgba(255, 255, 255, 0.555);
-        outline: none;
-        border: 1px solid rgb(167, 167, 167);
-        border-radius: 5px;
-        padding: 10.5px;
-        width: 75px;
-        margin: 20px;
-        font-weight: 700;
+        margin: 10px;
     }
 
 
 
 
+/* TASKS */
+.noTasksMessage {
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 200px;
+}
+
+.noTasksMessage button {
+    margin-top: 30px;
+
+}
 
 .task {
     height: 270px;
 
     max-height: 30px;
+
+    border-radius: 5px;
 
     transition: max-height 0.3s ease;
     margin-bottom: 10px;
