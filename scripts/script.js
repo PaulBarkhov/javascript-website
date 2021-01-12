@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
         modifiedDate = currentDate,
         months = ["Januar", "Februar", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    const body = document.querySelector("body");
+    const body = document.querySelector("body"),
+          glass = document.querySelectorAll(".glass");
 
     //HAMBURGER MENU
     const menu__button = document.querySelector(".menu__button")
@@ -45,11 +46,25 @@ document.addEventListener("DOMContentLoaded", () => {
         body.classList.toggle("brightMode");
         body.classList.toggle("darkMode");
 
+        // glass.forEach(item => {
+        //     if (item.classList.contains("glass")) {
+        //         item.classList.remove("glass");
+        //         item.classList.add("darkGlass");
+        //     }
+        //     else {
+        //         item.classList.add("glass");
+        //         item.classList.remove("darkGlass");
+        //     }
+        // });
+
         if (menu__darkModeButton.innerHTML == "Dark Mode") {
             menu__darkModeButton.innerHTML = "Bright Mode";
+            body.style.background = "url(style/images/image1.jpg)";
+        
         }
         else {
-            menu__darkModeButton.innerHTML = "Bright Mode";
+            menu__darkModeButton.innerHTML = "Dark Mode";
+            body.style.background = "url(style/images/image2.png)";
         }
     });
 
