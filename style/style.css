@@ -1,3 +1,14 @@
+    /* <WebView
+    android:id="@+id/webview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+</RelativeLayout>
+
+WebView web = (WebView)findViewById(R.id.webview);
+web.getSettings().setJavaScriptEnabled(true);
+web.setWebChromeClient(new WebChromeClient());
+web.loadUrl("file:///android_asset/www/index.html"); */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,19 +16,28 @@
 }
 
 body {
+    max-width: 400px;
+    margin: 0 auto;
     overflow-x: hidden;
     padding: 10px;
     box-sizing: border-box;
     font-weight: 400;
     min-height: 100vh;
 
-    background: url(images/image2.png);
+    background-image: url(images/bright1.jpg);
+    background-color: violet;
     background-size: cover;
+
+    background-blend-mode: hue;
+    /* background-blend-mode: difference; */
+    /* background-blend-mode: color; */
+
+    backdrop-filter: blur(100px);
 }
 
 button {
     color: black;
-    background-color: rgba(255, 255, 255, 0.555);
+    background-color: rgb(255, 255, 255);
     outline: none;
     border: 1px solid rgb(167, 167, 167);
     border-radius: 5px;
@@ -27,39 +47,16 @@ button {
     font-weight: 700;
 }
 
-/* body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(255, 0, 0, 0.63), rgba(255, 0, 255, 0.575));
-    clip-path: polygon(50% 68%, 69% 70%, 84% 75%, 100% 76%, 100% 100%, 50% 100%, 0 100%, 0 82%, 14% 76%, 31% 71%);
-}
-
-body::after {
-    z-index: -1;
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(255, 0, 0, 0.63), rgba(255, 0, 255, 0.575));
-    clip-path: circle(20% at left 40%);
-} */
-
 a {
     text-decoration: none;
 }
 
     .glass {
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-        background:rgba(255, 255, 255, 0.1);
-        border-top: 1px solid rgba(255, 255, 255, 0.5);
-        border-left: 1px solid rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(15px);
+        background:rgba(255, 255, 255, 0.377);
+        border-top: 1px solid rgba(255, 255, 255, 1);
+        border-left: 1px solid rgba(255, 255, 255, 1);
+        backdrop-filter: blur(10px);
     }
 
     .darkGlass {
@@ -68,117 +65,32 @@ a {
         backdrop-filter: blur(5px);
     }
 
-    .brightMode {
+    /* .brightMode {
         background-color: #adadad;
         color: black;
     }
 
     .darkMode {
         background: rgb(0, 0, 0);
-        color: white;
+        color: black;
+    } */
+
+    #addButton {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+
+        width: 75px;
+        height: 75px;
+
+        border-radius: 50px;
+        font-size: 25px;
     }
-
-    header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        border-radius: 5px;
-
-        padding: 8px;
-
-        margin-bottom: 10px;
-    }
-
-    header a.menu__button {
-        font-size: 30px;
-        font-weight: 700;
-    }
-
-    header a.add__task__button {
-        font-size: 20px;
-        font-weight: 700;
-        outline: none;
-        transition: transform .3s ease;
-
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    #toDo {
-        text-transform: uppercase;
-    }
-
-    .rotate {
-        transform: rotate(45deg);
-    }
-
-.menu__wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow-x: hidden;
-
-    max-height: 0px;
-
-    transition: max-height .3s ease;
-}
-
-.menu {
-    transform: translateY(-300px);
-    transition: transform .3s ease;
-    width: 100%;
-}
-
-.show__menu {
-    transform: translateY(0);
-}
-
-.close__menu {
-    transform: translateY(-300px);
-}
-
-.menu__item {
-    text-align: center;
-    padding: 10px;
-    margin: 0px 7px 10px 7px;
-    list-style: none;
-    border-radius: 5px;
-
-    text-transform: uppercase;
-    font-size: 16px;
-    font-weight: 400;
-
-    cursor: pointer;
-}
-
-/* .menu__item::after {
-    display: block;
-    content: "";
-    border-top: 1px solid black;
-    width: 100%;
-    margin: 0 auto;
-} */
-
-.menu__link {
-
-}
-
-
-
-
-
-
-
-
-
-
 
     /* TASK BOX */
     .taskBox {
         width: calc(100% - 20px);
-        height: 30vh;
-        max-height: 250px;
+        height: 250px;
         padding: 10px;
         border-radius: 5px;
 
@@ -197,9 +109,27 @@ a {
     }
 
     /* SET TASK NAME */
+    #closeButton {
+        position: absolute;
+        top: 20px;
+        right: 25px;
+        z-index: 2;
+        font-size: 20px;
+        color: black;
+    }
+
+    .backButton {
+        position: absolute;
+        left: 15px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
     .set__task__name #name {
+        background: none;
         outline: none;
-        border-radius: 5px;
+        border: none;
+        border-bottom: 1px solid black;
         /* border: 1px solid rgb(167, 167, 167); */
         /* -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
         -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
@@ -208,8 +138,20 @@ a {
         height: 18px;
         width: 200px;
 
+        color: black;
+        font-weight: 700;
+        font-size: 18px;
+        text-align: center;
+
         margin-top: 20px;
         margin-bottom: 40px;
+    }
+
+    .set__task__name #name::placeholder {
+        text-align: center;
+        color: black;
+        font-weight: 700;
+        font-size: 18px;
     }
 
     /* SET TASK COLOR */
@@ -224,10 +166,10 @@ a {
         overflow: hidden;
         border-radius: 50px;
         opacity: 0.9;
-        border-top: 1px solid rgba(255, 255, 255, 0.7);
-        border-left: 1px solid rgba(255, 255, 255, 0.7);
+        border-top: 1px solid rgba(255, 255, 255, 0.8);
+        border-left: 1px solid rgba(255, 255, 255, 0.8);
         position: relative;
-        box-shadow: 3px 3px 10px black;
+        box-shadow: 3px 3px 3px black;
     }
 
     .set__task__color th::before {
@@ -237,7 +179,7 @@ a {
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(120deg, #ffffff00, #0000008a);
+        background: linear-gradient(120deg, #ffffff2d, #0000005e);
    }
 
     .task__color {
@@ -268,6 +210,7 @@ a {
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        margin: 15px;
 
         font-size: 40px;
         font-weight: 700;
@@ -369,9 +312,37 @@ a {
 }
 
 .taskExpanded {
-    max-height: 270px;
+    max-height: 300px;
 }
 
+.textarea {
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 68%;
+    height: 145px;
+    
+}
+
+textarea {
+    max-width: calc(100% - 20px);
+    height: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: rgba(255, 255, 255, 0.287);
+    color: black;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
 .task__name {
     margin-left: 5px;
@@ -391,7 +362,7 @@ a {
 }
 
 .task__notifications {
-    margin: 15px;
+    margin: 20px 15px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.287);
     border: 1px solid black;
@@ -399,7 +370,7 @@ a {
     position: absolute;
     right: 0;
 
-    height: 75%;
+    height: 220px;
     width: 60px;
 
     font-size: 16px;
@@ -484,7 +455,8 @@ a {
 .calendar {
     border-radius: 5px;
     margin-bottom: 10px;
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 16px;
 }
 
 .calendarHeader {
@@ -494,13 +466,10 @@ a {
     padding: 5px 10px;
 }
 
-.calendarHeader a,
-.calendarHeader p {
-    flex: 33%;
-}
 
 .calendar__previousMonth {
     text-align: left;
+    flex: 20%;
 }
 
 .calendar__currentMonth {
@@ -509,7 +478,9 @@ a {
 
 .calendar__nextMonth {
     text-align: right;
+    flex: 20%;
 }
+
 
 .days {
     position: relative;

@@ -1,80 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     let currentDate = new Date(),
-        modifiedDate = currentDate,
         months = ["Januar", "Februar", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const body = document.querySelector("body"),
           glass = document.querySelectorAll(".glass");
 
-    //HAMBURGER MENU
-    const menu__button = document.querySelector(".menu__button")
-          menu__wrapper = document.querySelector(".menu__wrapper"),
-          menu = document.querySelector(".menu"),
-
-          menu__darkModeButton = document.querySelector("#menu__darkModeButton");
-
-    function showMenu() {
-        menu.classList.add("show__menu");
-        menu.classList.remove("close__menu");
-        menu__wrapper.style.maxHeight = "300px";
-    }
-
-    document.addEventListener("click", (event) => {
-        if (!menu.contains(event.target) && !menu__button.contains(event.target)) {
-            hideMenu();
-        }
-    })
-
-    function hideMenu() {
-        menu.classList.remove("show__menu");
-        menu.classList.add("close__menu");
-        menu__wrapper.style.maxHeight = "0px";
-    }
-
-    menu__button.addEventListener('click', (event) => {
-        event.preventDefault();
-        if (menu.classList.contains("show__menu")) {
-            hideMenu();
-        }
-        else {
-            showMenu();
-        }
-    });
-
-    menu__darkModeButton.addEventListener("click", () => {
-        body.classList.toggle("brightMode");
-        body.classList.toggle("darkMode");
-
-        // glass.forEach(item => {
-        //     if (item.classList.contains("glass")) {
-        //         item.classList.remove("glass");
-        //         item.classList.add("darkGlass");
-        //     }
-        //     else {
-        //         item.classList.add("glass");
-        //         item.classList.remove("darkGlass");
-        //     }
-        // });
-
-        if (menu__darkModeButton.innerHTML == "Dark Mode") {
-            menu__darkModeButton.innerHTML = "Bright Mode";
-            body.style.background = "url(style/images/image1.jpg)";
-        
-        }
-        else {
-            menu__darkModeButton.innerHTML = "Dark Mode";
-            body.style.background = "url(style/images/image2.png)";
-        }
-    });
-
-
     //ADD TASK
-    const toDo = document.querySelector('#toDo'),
-        
-          add__task__button = document.querySelector(".add__task__button"),
+    const addButton = document.querySelector("#addButton"),
+          closeButton = document.querySelector("#closeButton"),
           main = document.querySelector("main"),
           setDate = document.querySelector(".setDate"),
-          calendar = document.querySelector(".calendar"),
           content = document.querySelector(".content"),
           add__task__window__wrapper = document.querySelector(".add__task__window__wrapper"),
           
@@ -84,16 +19,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
           set__task__color = document.querySelector(".set__task__color"),
           task__colors = document.querySelectorAll("th"),
+          task__color__back__button = document.querySelector("#task__color__back__button"),
 
           set__task__time = document.querySelector(".set__task__time"),
           clock = document.querySelector(".clock"),
           clockHours = clock.querySelector(".hours"),
           clockMinutes = clock.querySelector(".minutes"),
+          task__time__back__button = document.querySelector("#task__time__back__button"),
           task__time__OK__button = document.querySelector("#task__time__OK__button"),
           task__date__skip__button = document.querySelector("#task__date__skip__button"),
-          task__time__input = document.querySelector("#time"), 
 
           set__task__notifications = document.querySelector(".set__task__notifications"),
+          task__notifications__back__button = document.querySelector("#task__notifications__back__button"),
           task__notifications__OK__button = document.querySelector("#task__notifications__OK__button"),
           
           notifications = set__task__notifications.querySelectorAll("input");
@@ -105,68 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
         notification_10min,
         notification_1hour,
         notification_1day;
-
-
-    function toggleMain() {
-        main.classList.toggle("hide"); 
-        add__task__window__wrapper.classList.toggle("hide");
-    }
-
-    function toggleContent() {
-        content.classList.toggle("hide");
-    }
-
-    function toggleHeader() {
-        event.preventDefault();
-
-        add__task__button.classList.toggle("rotate");
-
-        if (toDo.innerHTML == "To Do List") {
-            toDo.innerHTML = "New task";
-        }
-        else {
-            toDo.innerHTML = "To Do List";
-            hideTaskName();
-            if (!set__task__color.classList.contains("hide")) {
-                toggleTaskColor();
-            }
-            if (!set__task__time.classList.contains("hide")) {
-                toggleTaskTime();
-            }
-            if (!set__task__notifications.classList.contains("hide")) {
-                toggleTaskNotifications();
-            }
-            modifiedDate = currentDate;
-        }
-    }
-
-    function toggleTaskName() {
-        name = "New task";
-        set__task__name.classList.toggle("hide");
-    };
-
-    function showTaskName() {
-        name = "New task";
-        set__task__name.classList.remove("hide");
-        task__name__input.focus();
-    }
-
-    function hideTaskName() {
-        set__task__name.classList.add("hide");
-    }
-
-    function toggleTaskColor() {
-        set__task__color.classList.toggle("hide");
-    }
-
-    function toggleTaskDate() {
-        set__task__time.classList.toggle("hide");
-    }
-
-    function toggleTaskTime() {
-        set__task__time.classList.toggle("hide");
-        buildClock();
-    }
 
     function buildClock() {
         let hours = currentDate.getHours();
@@ -237,81 +112,108 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    function toggleTaskNotifications() {
-        set__task__notifications.classList.toggle("hide");
-    }
+    addButton.addEventListener("click", () => {
+    
+        main.classList.toggle("hide");
+        add__task__window__wrapper.classList.toggle("hide");
+        set__task__name.classList.toggle("hide");
 
-    add__task__button.addEventListener("click", () => {
-        if (content.classList.contains("hide")) {
-            content.classList.toggle("hide");
-            toggleHeader();
-            setDate.classList.toggle("hide");
+        task__name__input.focus();
+
+        let day = new Date().getDate(),
+            month = new Date().getMonth() + 1;
+
+        if (document.querySelector(".calendar__activeDay") != null) {
+            day = +(document.querySelector(".calendar__activeDay").innerHTML);
+            month = currentDate.getMonth() + 1;
         }
-        else {
-            toggleMain();
-            toggleHeader();
-            showTaskName();
-            hideMenu();
-            date = "";
+
+        if (day < 10) {
+            day = "0" + day;
         }
+        if (month < 10) {
+            month = "0" + month;
+        }
+
+        date = day + "." + month;
+        
     });
 
-    task__name__OK__button.addEventListener("click", (event) => {
-        event.preventDefault();
+    closeButton.addEventListener("click", () => {
+        main.classList.toggle("hide");
+        add__task__window__wrapper.classList.toggle("hide");
 
+        set__task__name.classList.add("hide");
+        set__task__color.classList.add("hide");
+        set__task__time.classList.add("hide");
+        set__task__notifications.classList.add("hide");
+
+        name = "";
+        color = "";
+        date = "";
+        time = "";
+        notification_10min = "";
+        notification_1hour = "";
+        notification_1day = "";
+
+    });
+
+    task__name__OK__button.addEventListener("click", () => {
         if (task__name__input.value == "") {
-            task__name__input.value = "New Task";
+            name = "New task";
         }
         else {
             name = task__name__input.value;
         }
-        task__name__input.value = "";
 
-        hideTaskName();
-        toggleTaskColor();
+        set__task__name.classList.toggle("hide");
+        set__task__color.classList.toggle("hide");
     });
-
 
     task__colors.forEach(item => {
         item.addEventListener("click", (event) => {
             color = event.target.style.backgroundColor;
 
-            toggleTaskColor();
+            set__task__color.classList.toggle("hide");
+            set__task__time.classList.toggle("hide");
 
-            if (date == "") {
-                toggleMain();
-                toggleContent();
-                setDate.classList.toggle("hide");
-            }
-            else {
-                toggleTaskTime();
-            }
+            buildClock();
         });
     });
 
-    task__time__OK__button.addEventListener("click", (event) => {
-        event.preventDefault();
+    task__color__back__button.addEventListener("click", () => {
+        set__task__color.classList.toggle("hide");
+        set__task__name.classList.toggle("hide");
+    });
 
-        modifiedDate = currentDate;
+    task__time__OK__button.addEventListener("click", () => {
 
         time = clockHours.innerHTML + ":" + clockMinutes.innerHTML;
 
-        toggleTaskTime();
-        toggleTaskNotifications();
+        set__task__time.classList.toggle("hide");
+        set__task__notifications.classList.toggle("hide");
+    });
+
+    task__time__back__button.addEventListener("click", () => {
+        set__task__time.classList.toggle("hide");
+        set__task__color.classList.toggle("hide");
     });
 
     task__date__skip__button.addEventListener("click", (event) => {
-        event.preventDefault();
-        console.log("fsdfsdf");
-        toggleTaskTime();
-        toggleTaskNotifications();
+        set__task__time.classList.toggle("hide");
+        set__task__notifications.classList.toggle("hide");
     });
 
-    task__notifications__OK__button.addEventListener("click", (event) => {
-        event.preventDefault();
+    task__notifications__back__button.addEventListener("click", () => {
+        set__task__notifications.classList.toggle("hide");
+        set__task__time.classList.toggle("hide");
+    });
 
-        toggleHeader();
-        toggleMain();
+    task__notifications__OK__button.addEventListener("click", () => {
+
+        set__task__notifications.classList.toggle("hide");
+        add__task__window__wrapper.classList.toggle("hide");
+        main.classList.toggle("hide");
 
         if (notifications[0].checked == true) {
             notification_10min = "checked";
@@ -349,6 +251,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
 
                 <div class="taskExpanded">
+                    <div class="textarea">
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <div class="buttons">
+                            <button>Save</button>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </div>
+                    </div>
                     <div class="task__notifications">
                         🔔
                         <p>1 day</p>
@@ -374,17 +284,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         <label class="switch">
                             <input type="checkbox" ${notification_10min}>
                             <span class="slider"></span>
-                        </label>                  
+                        </label>  
+                    </div>                
                 </div>
                 
             </div>
         `
         content.append(task);
-
-        const noTasksMessage = content.querySelector(".noTasksMessage");
-        if (noTasksMessage) {
-            noTasksMessage.remove();
-        }
 
         task.addEventListener("click", (event) => {
             //event.target.parentNode.classList.toggle("taskExpanded");
@@ -418,19 +324,14 @@ document.addEventListener("DOMContentLoaded", () => {
           calendar__nextMonth = document.querySelector(".calendar__nextMonth"),
           calendar__days = document.querySelector(".calendar__days");
 
-    let days,
-        exportMonth;
+    let days;
 
     function buildCalendar () {
         let mm = currentDate.getMonth(),
             yy = currentDate.getFullYear(),
+            dd = currentDate.getDate(),
 
             currentMonth = months[mm];
-
-        exportMonth = mm+1;
-        if (exportMonth < 10) {
-            exportMonth = "0" + exportMonth;
-        };
 
         let lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate(),
             lastDayIndex = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDay(),
@@ -439,7 +340,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             firstDayIndex = firstDayIndex.getDay();
 
         let prevMonthLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
-
 
         nextMonth = months[months.indexOf(currentMonth) + 1];
         previousMonth = months[months.indexOf(currentMonth) - 1];
@@ -464,12 +364,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }; // adds previous month`s days to start
 
         for (i = 1; i <= lastDay; i++) {
-            days.innerHTML += `<div>${i}</div>`;
+            days.innerHTML += `<div class="calendar__actualMonth">${i}</div>`;
         };  // add all days
 
         for (i = 1; i <= 7 - lastDayIndex; i++) {
             days.innerHTML += `<div class="calendar__anotherMonth">${i}</div>`;
         };
+
+        document.querySelectorAll(".calendar__actualMonth").forEach(item => {
+            if (item.innerHTML == new Date().getDate() && mm == new Date().getMonth()) {
+                item.classList.add("calendar__activeDay");
+            }
+        })
     };
 
     buildCalendar();
@@ -499,51 +405,11 @@ document.addEventListener("DOMContentLoaded", () => {
     calendar__days.addEventListener("click", (event) => {
         if (!event.target.classList.contains("days")) {
 
-            const tasks = content.querySelectorAll("div");
-
-            if (tasks.length == 0) {
-                const noTasksMessage = document.createElement("div");
-                noTasksMessage.setAttribute("class", "noTasksMessage glass");
-
-                noTasksMessage.innerHTML = `
-                    <h1> There are no tasks yet</h1>
-                    <button>Add</button>
-                `;
-
-                content.append(noTasksMessage);
-
-                const addButton = noTasksMessage.querySelector("button");
-
-                addButton.addEventListener("click", () => {
-                    toggleMain();
-                    toggleHeader();
-                    showTaskName();
-                    hideMenu();
-                    date = "";
-                });
-            }
-
-
-
-            let clickedDay = event.target.innerHTML;
-    
-            if (content.classList.contains('hide')) {
-                
-                if (clickedDay < 10) {
-                    clickedDay = "0" + clickedDay;
-                }
-                date = clickedDay + "." + exportMonth;
-
-                toggleMain();
-                toggleTaskTime();
-                toggleContent();
-                setDate.classList.toggle("hide");
-            }
-
             days.querySelectorAll("div").forEach(item => {
                 item.classList.remove("calendar__activeDay");
             })
             event.target.classList.add("calendar__activeDay");
+
         }
     });
                 
