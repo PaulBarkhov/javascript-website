@@ -237,72 +237,61 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         task = document.createElement("div");
+        task.setAttribute("class", "task glass");
         task.innerHTML = `
-            <div class="task glass">
-
-                <div class="taskMain">
-                    <div style="background: ${color}" class="task__color"></div>
-
-                    <div class="task__name">${name}</div>
-
-                    <div class="task__date">${date}</div>
-                    
-                    <div class="task__time">${time}</div>
-                </div>
-
-                <div class="taskExpanded">
-                    <div class="textarea">
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
-                        <div class="buttons">
-                            <button>Save</button>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </div>
-                    </div>
-                    <div class="task__notifications">
-                        🔔
-                        <p>1 day</p>
-
-                        <label class="switch">
-                            <input type="checkbox" ${notification_1day}>
-                            <span class="slider"></span>
-                        </label>
-
-                        <hr>
-
-                        <p>1 hour</p>
-                        
-                        <label class="switch">
-                            <input type="checkbox" ${notification_1hour}>
-                            <span class="slider"></span>
-                        </label>
-
-                        <hr>
-
-                        <p>10 min</p>
-
-                        <label class="switch">
-                            <input type="checkbox" ${notification_10min}>
-                            <span class="slider"></span>
-                        </label>  
-                    </div>                
-                </div>
-                
+  
+            <div class="header">
+                <div class="taskColor" style="background: ${color}"></div>
+                <div class="taskName">${name}</div>
+                <div class="taskDate">${date}</div>
+                <div class="taskTime">${time}</div>
             </div>
-        `
+
+            <div class="main">
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <div class="buttons">
+                    <button>✔</button>
+                    <button>🖊</button>
+                    <button>❌</button>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="notifications">
+                    <p>1 day</p>
+
+                    <label class="switch">
+                        <input type="checkbox" ${notification_1day}>
+                        <span class="slider"></span>
+                    </label>
+
+                    <hr>
+
+                    <p>1 hour</p>
+                    
+                    <label class="switch">
+                        <input type="checkbox" ${notification_1hour}>
+                        <span class="slider"></span>
+                    </label>
+
+                    <hr>
+
+                    <p>10 min</p>
+
+                    <label class="switch">
+                        <input type="checkbox" ${notification_10min}>
+                        <span class="slider"></span>
+                    </label> 
+                </div>`
+
         content.append(task);
 
         task.addEventListener("click", (event) => {
-            //event.target.parentNode.classList.toggle("taskExpanded");
-
-            if (event.target.classList.contains("task__name") || event.target.classList.contains("task__date") || event.target.classList.contains("task__time")) {
-                event.target.parentElement.parentElement.classList.toggle("taskExpanded");
-            }
-            if (event.target.classList.contains("taskMain")) {
-                event.target.parentElement.classList.toggle("taskExpanded");
+            if (event.target.classList.contains("taskName") || event.target.classList.contains("taskColor") || event.target.classList.contains("taskDate") || event.target.classList.contains("taskTime")) {
+                event.target.parentElement.parentElement.classList.toggle("expanded");
             }
             else {
-                event.target.classList.toggle("taskExpanded");
+                event.target.parentElement.classList.toggle("expanded");
             }
         });
     });
