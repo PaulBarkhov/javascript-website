@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const addButton = document.querySelector("#addButton"),
           closeButton = document.querySelector("#closeButton"),
           main = document.querySelector("main"),
-          setDate = document.querySelector(".setDate"),
           content = document.querySelector(".content"),
           add__task__window__wrapper = document.querySelector(".add__task__window__wrapper"),
           
@@ -27,21 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
           clockMinutes = clock.querySelector(".minutes"),
           task__time__back__button = document.querySelector("#task__time__back__button"),
           task__time__OK__button = document.querySelector("#task__time__OK__button"),
-          task__date__skip__button = document.querySelector("#task__date__skip__button"),
-
-          set__task__notifications = document.querySelector(".set__task__notifications"),
-          task__notifications__back__button = document.querySelector("#task__notifications__back__button"),
-          task__notifications__OK__button = document.querySelector("#task__notifications__OK__button"),
-          
-          notifications = set__task__notifications.querySelectorAll("input");
+          task__date__skip__button = document.querySelector("#task__date__skip__button");
 
     let name = "New task",
         color = "blue",
         date = "",
         time = "",
-        notification_10min,
-        notification_1hour,
-        notification_1day;
+        notification_10min = "checked",
+        notification_1hour = "",
+        notification_1day = "";
 
     function buildClock() {
         let hours = currentDate.getHours();
@@ -169,22 +162,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         set__task__name.classList.toggle("hide");
-        set__task__color.classList.toggle("hide");
+        set__task__time.classList.toggle("hide");
+        buildClock();
     });
 
-    task__colors.forEach(item => {
-        item.addEventListener("click", (event) => {
-            color = event.target.style.backgroundColor;
-
-            set__task__color.classList.toggle("hide");
-            set__task__time.classList.toggle("hide");
-
-            buildClock();
-        });
-    });
-
-    task__color__back__button.addEventListener("click", () => {
-        set__task__color.classList.toggle("hide");
+    task__time__back__button.addEventListener("click", () => {
+        set__task__time.classList.toggle("hide");
         set__task__name.classList.toggle("hide");
     });
 
@@ -193,22 +176,100 @@ document.addEventListener("DOMContentLoaded", () => {
         time = clockHours.innerHTML + ":" + clockMinutes.innerHTML;
 
         set__task__time.classList.toggle("hide");
-        set__task__notifications.classList.toggle("hide");
-    });
-
-    task__time__back__button.addEventListener("click", () => {
-        set__task__time.classList.toggle("hide");
         set__task__color.classList.toggle("hide");
     });
 
     task__date__skip__button.addEventListener("click", (event) => {
         set__task__time.classList.toggle("hide");
-        set__task__notifications.classList.toggle("hide");
+        set__task__color.classList.toggle("hide");
     });
 
-    task__notifications__back__button.addEventListener("click", () => {
-        set__task__notifications.classList.toggle("hide");
+
+    task__color__back__button.addEventListener("click", () => {
+        set__task__color.classList.toggle("hide");
         set__task__time.classList.toggle("hide");
+    });
+
+    task__colors.forEach(item => {
+        item.addEventListener("click", (event) => {
+            color = event.target.style.backgroundColor;
+
+            set__task__color.classList.toggle("hide");
+            add__task__window__wrapper.classList.toggle("hide");
+            main.classList.toggle("hide");
+            addButton.classList.toggle("hide");
+
+            task = document.createElement("div");
+            task.setAttribute("class", "task glass");
+            task.innerHTML = `
+      
+                <div class="header">
+                    <div class="taskColor" style="background: ${color}"></div>
+                    <div class="taskName">${name}</div>
+                    <div class="taskDate">${date}</div>
+                    <div class="taskTime">${time}</div>
+                </div>
+    
+                <div class="main">
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <div class="buttons">
+                        <button class="done">✔</button>
+                        <button>🖊</button>
+                        <button>❌</button>
+                    </div>
+                </div>
+    
+                <div class="right">
+                    <div class="notifications">
+                        <div>
+                            <p>1 day</p>
+
+                            <label class="switch">
+                                <input type="checkbox" ${notification_1day}>
+                                <span class="slider"></span>
+                            </label>
+                            <hr>
+                        </div>
+
+                        <div>
+                            <p>1 hour</p>
+                            
+                            <label class="switch">
+                                <input type="checkbox" ${notification_1hour}>
+                                <span class="slider"></span>
+                            </label>
+                            <hr>
+                        </div>
+                        
+                        <div>
+                            <p>10 min</p>
+        
+                            <label class="switch">
+                                <input type="checkbox" ${notification_10min}>
+                                <span class="slider"></span>
+                            </label> 
+                        </div>
+                    </div>`
+    
+            content.append(task);
+
+            task.classList.toggle("expanded");
+    
+            //checkSystemColorScheme();
+    
+            task.addEventListener("click", (event) => {
+                if (event.target.classList.contains("taskName") || event.target.classList.contains("taskColor") || event.target.classList.contains("taskDate") || event.target.classList.contains("taskTime")) {
+                    event.target.parentElement.parentElement.classList.toggle("expanded");
+                }
+                if (event.target.classList.contains("done")) {
+                    event.target.parentElement.parentElement.parentElement.classList.toggle("expanded");
+                }
+                else {
+                    event.target.parentElement.classList.toggle("expanded");
+                }
+            });
+    
+        });
     });
 
     task__notifications__OK__button.addEventListener("click", () => {
@@ -218,87 +279,6 @@ document.addEventListener("DOMContentLoaded", () => {
         main.classList.toggle("hide");
         addButton.classList.toggle("hide");
 
-        if (notifications[0].checked == true) {
-            notification_10min = "checked";
-        }
-        else {
-            notification_10min = "";
-        }
-
-        if (notifications[1].checked == true) {
-            notification_1hour = "checked";
-        }
-        else {
-            notification_1hour = "";
-        }
-
-        if (notifications[2].checked == true) {
-            notification_1day = "checked";
-        }
-        else {
-            notification_1day = "";
-        }
-
-        task = document.createElement("div");
-        task.setAttribute("class", "task glass");
-        task.innerHTML = `
-  
-            <div class="header">
-                <div class="taskColor" style="background: ${color}"></div>
-                <div class="taskName">${name}</div>
-                <div class="taskDate">${date}</div>
-                <div class="taskTime">${time}</div>
-            </div>
-
-            <div class="main">
-                <textarea name="" id="" cols="30" rows="10"></textarea>
-                <div class="buttons">
-                    <button>✔</button>
-                    <button>🖊</button>
-                    <button>❌</button>
-                </div>
-            </div>
-
-            <div class="right">
-                <div class="notifications">
-                    <p>1 day</p>
-
-                    <label class="switch">
-                        <input type="checkbox" ${notification_1day}>
-                        <span class="slider"></span>
-                    </label>
-
-                    <hr>
-
-                    <p>1 hour</p>
-                    
-                    <label class="switch">
-                        <input type="checkbox" ${notification_1hour}>
-                        <span class="slider"></span>
-                    </label>
-
-                    <hr>
-
-                    <p>10 min</p>
-
-                    <label class="switch">
-                        <input type="checkbox" ${notification_10min}>
-                        <span class="slider"></span>
-                    </label> 
-                </div>`
-
-        content.append(task);
-
-        //checkSystemColorScheme();
-
-        task.addEventListener("click", (event) => {
-            if (event.target.classList.contains("taskName") || event.target.classList.contains("taskColor") || event.target.classList.contains("taskDate") || event.target.classList.contains("taskTime")) {
-                event.target.parentElement.parentElement.classList.toggle("expanded");
-            }
-            else {
-                event.target.parentElement.classList.toggle("expanded");
-            }
-        });
     });
 
 

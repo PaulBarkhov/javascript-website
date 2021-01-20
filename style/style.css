@@ -17,7 +17,7 @@ web.loadUrl("file:///android_asset/www/index.html"); */
 }
 
 body {
-    max-width: 400px;
+    max-width: 425px;
     margin: 0 auto;
     overflow-x: hidden;
     padding: 10px;
@@ -82,7 +82,7 @@ a {
     } 
 
     #addButton {
-        position: absolute;
+        position: fixed;
         bottom: 30px;
         right: 30px;
 
@@ -236,41 +236,6 @@ a {
             text-align: center;
         }
 
-    /* SET TASK NOTIFICATIONS */
-    .set__task__notifications {
-        align-items: center;
-        text-align: center;
-    }
-
-    .set__task__notifications .notifications__item {
-        list-style: none;
-        padding: 5px;
-    }
-
-    .set__task__notifications input {
-        margin-right: 10px;
-    }
-/* 
-    .set__task__notifications .notifications__item::after {
-        display: block;
-        content: "";
-        border-top: 1px solid black;
-        width: 100%;
-        margin: 0 auto;
-    } */
-
-    .set__task__notifications .notifications__link {
-        font-size: 22px;
-        text-decoration: none;
-        font-weight: 400;
-    }
-
-    .set__task__notifications button {
-        margin: 10px;
-    }
-
-
-
 
 /* TASKS */
 .header { grid-area: header;}
@@ -380,12 +345,18 @@ a {
 }
 
 .task .notifications {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100%;
+
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.287);
     border: 1px solid black;
 
     font-size: 16px;
-
     text-align: center;
 }
 
@@ -413,7 +384,7 @@ a {
     top: 0;
 
     width: 40px;
-    height: 100%;
+    height: 21px;
 
     border-radius: 15px;
     border: 1px solid rgba(0, 0, 0, 0.37);
