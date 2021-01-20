@@ -113,6 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     addButton.addEventListener("click", () => {
+
+        addButton.classList.toggle("hide");
     
         main.classList.toggle("hide");
         add__task__window__wrapper.classList.toggle("hide");
@@ -214,6 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
         set__task__notifications.classList.toggle("hide");
         add__task__window__wrapper.classList.toggle("hide");
         main.classList.toggle("hide");
+        addButton.classList.toggle("hide");
 
         if (notifications[0].checked == true) {
             notification_10min = "checked";
@@ -285,6 +288,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>`
 
         content.append(task);
+
+        //checkSystemColorScheme();
 
         task.addEventListener("click", (event) => {
             if (event.target.classList.contains("taskName") || event.target.classList.contains("taskColor") || event.target.classList.contains("taskDate") || event.target.classList.contains("taskTime")) {
@@ -401,5 +406,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
     });
+
+
+    //DEVICE COLOR THEME
+    // function checkSystemColorScheme() {
+    //     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            
+    //         body.classList.remove("bright");
+    //         body.classList.add("dark");
+
+    //         document.querySelectorAll(".glass").forEach(item => {
+    //             item.classList.add("darkGlass");
+    //         });
+
+    //         document.querySelectorAll("button").forEach(item => {
+    //             item.style.color = "white";
+    //         });
+
+    //         document.querySelector("#name").classList.remove("blackPlaceholder");
+    //         document.querySelector("#name").classList.add("whitePlaceholder");
+    //     }
+    //     else {
+    //         body.classList.remove("dark");
+    //         body.classList.add("bright");
+
+    //         document.querySelectorAll(".glass").forEach(item => {
+    //             item.classList.remove("darkGlass");
+    //         });
+
+    //         document.querySelectorAll("button").forEach(item => {
+    //             item.style.color = "black";
+    //         });
+
+    //         document.querySelector("#name").classList.remove("whitePlaceholder");
+    //         document.querySelector("#name").classList.add("blackPlaceholder");
+    //     }
+    // }
+
+    // checkSystemColorScheme();
+
+    // window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+    //     checkSystemColorScheme();
+    // });
                 
 });

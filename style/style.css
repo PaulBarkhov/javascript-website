@@ -25,19 +25,26 @@ body {
     font-weight: 400;
     min-height: 100vh;
 
-    background-image: url(images/bright1.jpg);
-    background-color: violet;
-    background-size: cover;
-
-    /* background-blend-mode: hue; */
+    /* background-blend-mode: luminosity; */
     /* background-blend-mode: difference; */
     /* background-blend-mode: color; */
 
     backdrop-filter: blur(100px);
 }
 
+.bright {
+    background-image: url(images/bright1.jpg);
+    background-color: rgb(246, 99, 222);
+    background-size: cover;
+    background-blend-mode: hue;
+}
+
+.dark {
+    background-color: black;
+    color: white;
+}
+
 button {
-    color: black;
     background-color: rgba(255, 255, 255, 0.287);
     outline: none;
     border: 1px solid rgb(97, 97, 97);
@@ -61,20 +68,18 @@ a {
     }
 
     .darkGlass {
-        background:rgba(255, 255, 255, 0.1);
+        background:rgba(255, 255, 255, 0.103);
         border: 1px solid rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(5px);
     }
 
     /* .brightMode {
         background-color: #adadad;
         color: black;
-    }
+    }*/
 
     .darkMode {
-        background: rgb(0, 0, 0);
-        color: black;
-    } */
+        color: rgb(211, 211, 211);
+    } 
 
     #addButton {
         position: absolute;
@@ -139,7 +144,6 @@ a {
         height: 18px;
         width: 200px;
 
-        color: black;
         font-weight: 700;
         font-size: 18px;
         text-align: center;
@@ -148,9 +152,16 @@ a {
         margin-bottom: 40px;
     }
 
+    .set__task__name .whitePlaceholder::placeholder {
+        color: white;
+    }
+
+    .set__task__name .blackPlaceholder::placeholder {
+        color: black;
+    }
+
     .set__task__name #name::placeholder {
         text-align: center;
-        color: black;
         font-weight: 700;
         font-size: 18px;
     }
@@ -269,7 +280,6 @@ a {
 
 .task {
     margin-bottom: 10px;
-    color: black;
     display: grid;
     grid-template-areas:
         'header header header header header header'
@@ -352,7 +362,6 @@ a {
     border: 1px solid black;
     outline: none;
 
-    color: black;
     font-size: 16px;
     font-weight: 400;
 }
