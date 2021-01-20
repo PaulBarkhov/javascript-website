@@ -91,7 +91,7 @@ a {
         padding-top: 8px;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
 
         position: relative;
@@ -106,6 +106,10 @@ a {
     }
 
     /* SET TASK NAME */
+    .set__task__name {
+        height: 100vh;
+    }
+
     #closeButton {
         position: absolute;
         top: 20px;
@@ -443,6 +447,10 @@ a {
     justify-content: space-between;
 
     padding: 5px 10px;
+}
+
+.calendarHeader img {
+    height: 20px;
 }
 
 .calendarFooter {

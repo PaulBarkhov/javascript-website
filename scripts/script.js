@@ -287,6 +287,11 @@ document.addEventListener("DOMContentLoaded", () => {
                             firstDayIndex.setDate(1); 
                             firstDayIndex = firstDayIndex.getDay();
 
+        console.log(`last day is ${lastDay}`);
+        console.log(`last day index is ${lastDayIndex}`);
+        console.log(`first day index is ${firstDayIndex}`);
+        console.log(`----------------------`);
+
         let prevMonthLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
 
         nextMonth = months[months.indexOf(currentMonth) + 1];
@@ -300,24 +305,41 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         calendar__currentMonth.innerHTML = `${currentMonth} ${yy}`;
-        calendar__previousMonth.innerHTML = `◀ ${previousMonth.slice(0,3)}`;
-        calendar__nextMonth.innerHTML = `${nextMonth.slice(0,3)} ▶`;
+        calendar__previousMonth.innerHTML = `< ${previousMonth.slice(0,3)}`;
+        calendar__nextMonth.innerHTML = `${nextMonth.slice(0,3)} >`;
 
         days = document.createElement("div");
         days.classList.add("days");
         calendar__days.append(days);
 
-        for (i = firstDayIndex - 1; i > 0; i--) {
-            days.innerHTML += `<div class="calendar__anotherMonth">${prevMonthLastDay - i}</div>`;
-        }; // adds previous month`s days to start
+        if (firstDayIndex == 0) { firstDayIndex = 7};
+
+        if (firstDayIndex == 1) {
+            for (i = 7; i > 0; i--) {
+                days.innerHTML += `<div class="calendar__anotherMonth">${prevMonthLastDay - i + 1}</div>`;
+            };
+        }
+        else {
+            for (i = firstDayIndex - 1; i > 0; i--) {
+                days.innerHTML += `<div class="calendar__anotherMonth">${prevMonthLastDay - i + 1}</div>`;
+            }; // adds previous month`s days to start
+        }
 
         for (i = 1; i <= lastDay; i++) {
             days.innerHTML += `<div class="calendar__actualMonth">${i}</div>`;
         };  // add all days
 
-        for (i = 1; i <= 7 - lastDayIndex; i++) {
-            days.innerHTML += `<div class="calendar__anotherMonth">${i}</div>`;
-        };
+        // for (i = 1; i <= 7 - lastDayIndex; i++) {
+        //     days.innerHTML += `<div class="calendar__anotherMonth">${i}</div>`;
+        // }
+
+        if (days.querySelectorAll("div").length < 42) {
+            let x = 42 - days.querySelectorAll("div").length;
+            for (i = 1; i <= x; i++) {
+                days.innerHTML += `<div class="calendar__anotherMonth">${i}</div>`;
+            }
+        }
+
 
         document.querySelectorAll(".calendar__actualMonth").forEach(item => {
             if (item.innerHTML == new Date().getDate() && mm == new Date().getMonth()) {
