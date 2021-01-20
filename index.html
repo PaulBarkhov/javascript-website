@@ -11,13 +11,28 @@
             <div class="add__task__window">
                 <a id="closeButton">✖</a>
 
-                <div class="set__task__name glass taskBox hide">    
+                <div class="set__task__name taskBox hide">    
                     <h2>Give it a name</h2>
                     <input autocomplete="off" placeholder="New Task" type="text" id="name" class="blackPlaceholder">
                     <button id="task__name__OK__button">OK</button>
                 </div>
 
-                <div class="set__task__color glass taskBox hide">
+                <div class="set__task__time hide taskBox">
+                    <a id="task__time__back__button" class="backButton">&#5176;</a>
+                    <h2>Set time</h2>
+                    <div class="clock">
+                        <div class="hours">12</div>
+                        :
+                        <div class="minutes">30</div>
+                    </div>
+
+                    <div>
+                        <button id="task__time__OK__button">OK</button>
+                    </div>
+
+                </div>
+
+                <div class="set__task__color taskBox hide">
                     <a id="task__color__back__button" class="backButton">&#5176;</a>
                     <table>
                         <h2>Set color</h2>
@@ -34,36 +49,6 @@
                         </tr>
                     </table>    
                 </div>
-
-                <div class="set__task__time glass hide taskBox">
-                    <a id="task__time__back__button" class="backButton">&#5176;</a>
-                    <h2>Set time</h2>
-                    <div class="clock">
-                        <div class="hours">12</div>
-                        :
-                        <div class="minutes">30</div>
-                    </div>
-
-                    <div>
-                        <button id="task__time__OK__button">OK</button>
-                        <button id="task__date__skip__button">SKIP</button>
-                    </div>
-
-                </div>
-
-                <div class="set__task__notifications glass taskBox hide">
-                    <a id="task__notifications__back__button" class="backButton">&#5176;</a>
-                    <h2>Set notifications</h2>
-                    <ul class="notifications">
-                        <hr>
-                        <li class="notifications__item"><input type="checkbox" name="minutes" id="minutes" checked="true"><label for="minutes" class="notifications__link">10 minutes before event</label></li>
-                        <hr>
-                        <li class="notifications__item"><input type="checkbox" name="hour" id="hour"><label for="hour" class="notifications__link">One hour before the event</label></li>
-                        <hr>
-                        <li class="notifications__item"><input type="checkbox" name="day" id="day"><label for="day" class="notifications__link">One day before the event</label></li>
-                        <hr>
-                    </ul>
-                    <button id="task__notifications__OK__button">OK</button>
 
                 </div>
             </div>
@@ -97,7 +82,7 @@
             </div>
     
             <div class="calendarFooter">
-    
+                <button id="addButton">➕</button>
             </div>
     
         </div>
@@ -109,7 +94,6 @@
 
     </main>
 
-    <button id="addButton" class="glass">➕</button>
 
 
     <footer>

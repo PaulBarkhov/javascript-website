@@ -25,9 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
           clockHours = clock.querySelector(".hours"),
           clockMinutes = clock.querySelector(".minutes"),
           task__time__back__button = document.querySelector("#task__time__back__button"),
-          task__time__OK__button = document.querySelector("#task__time__OK__button"),
-          task__date__skip__button = document.querySelector("#task__date__skip__button");
-
+          task__time__OK__button = document.querySelector("#task__time__OK__button");
+          
     let name = "New task",
         color = "blue",
         date = "",
@@ -106,8 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     addButton.addEventListener("click", () => {
-
-        addButton.classList.toggle("hide");
     
         main.classList.toggle("hide");
         add__task__window__wrapper.classList.toggle("hide");
@@ -179,12 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
         set__task__color.classList.toggle("hide");
     });
 
-    task__date__skip__button.addEventListener("click", (event) => {
-        set__task__time.classList.toggle("hide");
-        set__task__color.classList.toggle("hide");
-    });
-
-
     task__color__back__button.addEventListener("click", () => {
         set__task__color.classList.toggle("hide");
         set__task__time.classList.toggle("hide");
@@ -197,7 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
             set__task__color.classList.toggle("hide");
             add__task__window__wrapper.classList.toggle("hide");
             main.classList.toggle("hide");
-            addButton.classList.toggle("hide");
 
             task = document.createElement("div");
             task.setAttribute("class", "task glass");
@@ -272,20 +262,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    task__notifications__OK__button.addEventListener("click", () => {
-
-        set__task__notifications.classList.toggle("hide");
-        add__task__window__wrapper.classList.toggle("hide");
-        main.classList.toggle("hide");
-        addButton.classList.toggle("hide");
-
-    });
-
-
-
-
-
-
 
 
 
@@ -326,8 +302,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         calendar__currentMonth.innerHTML = `${currentMonth} ${yy}`;
-        calendar__previousMonth.innerHTML = `${previousMonth}`;
-        calendar__nextMonth.innerHTML = `${nextMonth}`;
+        calendar__previousMonth.innerHTML = `◀ ${previousMonth.slice(0,3)}`;
+        calendar__nextMonth.innerHTML = `${nextMonth.slice(0,3)} ▶`;
 
         days = document.createElement("div");
         days.classList.add("days");
