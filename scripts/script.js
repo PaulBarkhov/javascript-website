@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
           clockMinutes = clock.querySelector(".minutes"),
           task__time__back__button = document.querySelector("#task__time__back__button"),
           task__time__OK__button = document.querySelector("#task__time__OK__button");
-          
+
     let name = "New task",
         color = "blue",
         date = "",
@@ -104,8 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    addButton.addEventListener("click", () => {
-    
+    addButton.addEventListener("click", () => {    
         main.classList.toggle("hide");
         add__task__window__wrapper.classList.toggle("hide");
         set__task__name.classList.toggle("hide");
@@ -128,7 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         date = day + "." + month;
-        
     });
 
     closeButton.addEventListener("click", () => {
