@@ -20,7 +20,6 @@ body {
     max-width: 425px;
     margin: 0 auto;
     overflow-x: hidden;
-    padding: 10px;
     box-sizing: border-box;
     font-weight: 400;
     min-height: 100vh;
@@ -33,15 +32,13 @@ body {
 }
 
 .bright {
-    background-image: url(images/bright1.jpg);
-    background-color: rgb(246, 99, 222);
-    background-size: cover;
-    background-blend-mode: hue;
+    background-color: white;
+    color: black;
 }
 
 .dark {
     background-color: black;
-    color: white;
+    color: rgb(190, 190, 190);
 }
 
 button {
@@ -106,9 +103,6 @@ a {
     }
 
     /* SET TASK NAME */
-    .set__task__name {
-        height: 100vh;
-    }
 
     #closeButton {
         position: absolute;
@@ -240,13 +234,18 @@ a {
 .buttons { grid-area: footer;}
 
 .task {
+    position: relative;
+
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: rgb(219, 216, 216);
+
     margin-bottom: 10px;
     display: grid;
     grid-template-areas:
         'header header header header header header'
         'main main main main right right';
 
-    border-radius: 5px;
 
     overflow: hidden;
 
@@ -304,7 +303,6 @@ a {
 }
 
 .task .taskDate {
-    flex: 30%;
     text-align: right;
 }
 
@@ -319,7 +317,7 @@ a {
     margin-bottom: 5px;
     border-radius: 5px;
 
-    background-color: rgba(255, 255, 255, 0.287);
+    background-color: rgb(255, 255, 255);
     border: 1px solid black;
     outline: none;
 
@@ -336,9 +334,10 @@ a {
     width: 30%;
 
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.287);
+    background-color: rgb(255, 255, 255);
     border: 1px solid black;
 }
+
 
 .task .notifications {
     display: flex;
@@ -349,7 +348,7 @@ a {
     height: 100%;
 
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.287);
+    background-color: rgb(255, 255, 255);
     border: 1px solid black;
 
     font-size: 16px;
@@ -443,10 +442,11 @@ a {
 }
 
 .calendarHeader {
+    background-color: rgb(212, 212, 212);
     display: flex;
     justify-content: space-between;
 
-    padding: 5px 10px;
+    padding: 10px;
 }
 
 .calendarHeader img {
@@ -454,6 +454,7 @@ a {
 }
 
 .calendarFooter {
+    background-color: rgb(212, 212, 212);
     margin-top: -5px;
     text-align: center;
 
@@ -462,6 +463,7 @@ a {
 
 .calendarFooter #addButton {
     width: 100%;
+    padding: 5px;
 }
 
 .calendar__previousMonth {
@@ -483,8 +485,11 @@ a {
 
 .calendar__anotherMonth {
     color: rgb(82, 80, 80);
-    background-color: rgba(122, 121, 121, 0.226);
     z-index: 1;
+}
+
+.calendar__actualMonth {
+    clip-path: circle(35% at 50% 50%);
 }
 
 .calendar__activeDay {
@@ -492,11 +497,9 @@ a {
     position: relative;
     background-color: green;
     clip-path: circle(35% at 50% 50%);
-
 }
 
 .calendar__weekdays {
-    background-color: rgba(255, 0, 0, 0.438);
     padding: 3px 0px 7px;
     width: 100%;
     display: flex;

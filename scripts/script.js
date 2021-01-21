@@ -27,15 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
           task__time__back__button = document.querySelector("#task__time__back__button"),
           task__time__OK__button = document.querySelector("#task__time__OK__button");
 
-    let name = "New task",
-        color = "blue",
-        date = "",
-        time = "",
-        notification_10min = "checked",
-        notification_1hour = "",
-        notification_1day = "";
+    let object = {
+        name: "New task",
+        color: "blue",
+        date: "",
+        time: "",
+        notification_10min: "checked",
+        notification_1hour: "",
+        notification_1day: ""
+    }
 
-    function buildClock() {
+    const buildClock = () => {
         let hours = currentDate.getHours();
         let minutes = currentDate.getMinutes();
 
@@ -104,6 +106,95 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    const buildTask = (clickedDay) => {
+        getResource('http://localhost:3000/requests')
+        .then(data => {
+            data.forEach(({date, time, name, color, notification_10min, notification_1hour, notification_1day, id}) => {
+                if (date == clickedDay) {
+                    task = document.createElement("div");
+                    task.setAttribute("class", "task");
+                    task.innerHTML = `
+              
+                        <div class="header">
+                            <div class="taskColor" style="background: ${color}"></div>
+                            <div class="taskName">${name}</div>
+                            <div class="taskTime">${time}</div>
+                        </div>
+            
+                        <div class="main">
+                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                            <div class="buttons">
+                                <button class="done">✔</button>
+                                <button>🖊</button>
+                                <button class="delete">❌</button>
+                            </div>
+                        </div>
+            
+                        <div class="right">
+                            <div class="notifications">
+                                <div>
+                                    <p>1 day</p>
+        
+                                    <label class="switch">
+                                        <input type="checkbox" ${notification_1day}>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <hr>
+                                </div>
+        
+                                <div>
+                                    <p>1 hour</p>
+                                    
+                                    <label class="switch">
+                                        <input type="checkbox" ${notification_1hour}>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <hr>
+                                </div>
+                                
+                                <div>
+                                    <p>10 min</p>
+                
+                                    <label class="switch">
+                                        <input type="checkbox" ${notification_10min}>
+                                        <span class="slider"></span>
+                                    </label> 
+                                </div>
+                            </div>`
+            
+                    content.append(task);
+        
+                    task.addEventListener("click", (event) => {
+                        if (event.target.classList.contains("taskName") || event.target.classList.contains("taskColor") || event.target.classList.contains("taskDate") || event.target.classList.contains("taskTime")) {
+                            event.target.parentElement.parentElement.classList.toggle("expanded");
+                        }
+                        if (event.target.classList.contains("done")) {
+                            event.target.parentElement.parentElement.parentElement.classList.toggle("expanded");
+                        }
+                        else {
+                            event.target.parentElement.classList.toggle("expanded");
+                        }
+                    });        
+
+                    task.querySelector(".delete").addEventListener("click", () => {
+                        fetch(`http://localhost:3000/requests/${id}/`, {
+                            method: 'DELETE',
+                        });
+                        task.remove();
+                        document.querySelectorAll(".calendar__actualMonth").forEach(item => {
+                            if (item.classList.contains("calendar__activeDay")) {
+                                item.style.backgroundColor = "";
+                                item.style.color = "";
+                                item.classList.toggle("calendar__activeDay");
+                                item.classList.toggle("calendar__activeDay");
+                            }
+                        }) 
+                    });
+                }
+            });
+        });
+    }
+
     addButton.addEventListener("click", () => {    
         main.classList.toggle("hide");
         add__task__window__wrapper.classList.toggle("hide");
@@ -113,10 +204,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let day = new Date().getDate(),
             month = new Date().getMonth() + 1;
+            year = new Date().getFullYear();
 
         if (document.querySelector(".calendar__activeDay") != null) {
             day = +(document.querySelector(".calendar__activeDay").innerHTML);
             month = currentDate.getMonth() + 1;
+            year = currentDate.getFullYear();
         }
 
         if (day < 10) {
@@ -126,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
             month = "0" + month;
         }
 
-        date = day + "." + month;
+        object.date = day + "." + month + "." + year;
     });
 
     closeButton.addEventListener("click", () => {
@@ -136,24 +229,27 @@ document.addEventListener("DOMContentLoaded", () => {
         set__task__name.classList.add("hide");
         set__task__color.classList.add("hide");
         set__task__time.classList.add("hide");
-        set__task__notifications.classList.add("hide");
 
-        name = "";
-        color = "";
-        date = "";
-        time = "";
-        notification_10min = "";
-        notification_1hour = "";
-        notification_1day = "";
-
+        object.name = "";
+        object.color = "";
+        object.date = "";
+        object.time = "";
+        object.notification_10min = "";
+        object.notification_1hour = "";
+        object.notification_1day = "";
+    });
+    
+    task__time__back__button.addEventListener("click", () => {
+        set__task__time.classList.toggle("hide");
+        set__task__name.classList.toggle("hide");
     });
 
     task__name__OK__button.addEventListener("click", () => {
         if (task__name__input.value == "") {
-            name = "New task";
+            object.name = "New task";
         }
         else {
-            name = task__name__input.value;
+            object.name = task__name__input.value;
         }
 
         set__task__name.classList.toggle("hide");
@@ -161,103 +257,45 @@ document.addEventListener("DOMContentLoaded", () => {
         buildClock();
     });
 
-    task__time__back__button.addEventListener("click", () => {
-        set__task__time.classList.toggle("hide");
-        set__task__name.classList.toggle("hide");
-    });
-
-    task__time__OK__button.addEventListener("click", () => {
-
-        time = clockHours.innerHTML + ":" + clockMinutes.innerHTML;
-
-        set__task__time.classList.toggle("hide");
-        set__task__color.classList.toggle("hide");
-    });
-
     task__color__back__button.addEventListener("click", () => {
         set__task__color.classList.toggle("hide");
         set__task__time.classList.toggle("hide");
     });
 
+    task__time__OK__button.addEventListener("click", () => {
+        object.time = clockHours.innerHTML + ":" + clockMinutes.innerHTML;
+
+        set__task__time.classList.toggle("hide");
+        set__task__color.classList.toggle("hide");
+    });
+
     task__colors.forEach(item => {
         item.addEventListener("click", (event) => {
-            color = event.target.style.backgroundColor;
+            object.color = event.target.style.backgroundColor;
 
             set__task__color.classList.toggle("hide");
             add__task__window__wrapper.classList.toggle("hide");
             main.classList.toggle("hide");
 
-            task = document.createElement("div");
-            task.setAttribute("class", "task glass");
-            task.innerHTML = `
-      
-                <div class="header">
-                    <div class="taskColor" style="background: ${color}"></div>
-                    <div class="taskName">${name}</div>
-                    <div class="taskDate">${date}</div>
-                    <div class="taskTime">${time}</div>
-                </div>
-    
-                <div class="main">
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                    <div class="buttons">
-                        <button class="done">✔</button>
-                        <button>🖊</button>
-                        <button>❌</button>
-                    </div>
-                </div>
-    
-                <div class="right">
-                    <div class="notifications">
-                        <div>
-                            <p>1 day</p>
+            //BACKEND
+            const postData = async (url, data) => {
+                const res = await fetch (url, {
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: data
+                });
+            }
 
-                            <label class="switch">
-                                <input type="checkbox" ${notification_1day}>
-                                <span class="slider"></span>
-                            </label>
-                            <hr>
-                        </div>
+            postData("http://localhost:3000/requests", JSON.stringify(object));
 
-                        <div>
-                            <p>1 hour</p>
-                            
-                            <label class="switch">
-                                <input type="checkbox" ${notification_1hour}>
-                                <span class="slider"></span>
-                            </label>
-                            <hr>
-                        </div>
-                        
-                        <div>
-                            <p>10 min</p>
-        
-                            <label class="switch">
-                                <input type="checkbox" ${notification_10min}>
-                                <span class="slider"></span>
-                            </label> 
-                        </div>
-                    </div>`
-    
-            content.append(task);
+            if (days) { days.remove() };
+            buildCalendar();
+            buildTask(object.date);
 
-            task.classList.toggle("expanded");
-    
-            //checkSystemColorScheme();
-    
-            task.addEventListener("click", (event) => {
-                if (event.target.classList.contains("taskName") || event.target.classList.contains("taskColor") || event.target.classList.contains("taskDate") || event.target.classList.contains("taskTime")) {
-                    event.target.parentElement.parentElement.classList.toggle("expanded");
-                }
-                if (event.target.classList.contains("done")) {
-                    event.target.parentElement.parentElement.parentElement.classList.toggle("expanded");
-                }
-                else {
-                    event.target.parentElement.classList.toggle("expanded");
-                }
-            });
-    
         });
+
     });
 
 
@@ -274,6 +312,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let days;
 
+    const getResource = async (url) => {
+        const res = await fetch(url);
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+        }
+        return await res.json();
+    }
+
     function buildCalendar () {
         let mm = currentDate.getMonth(),
             yy = currentDate.getFullYear(),
@@ -286,11 +332,6 @@ document.addEventListener("DOMContentLoaded", () => {
             firstDayIndex = currentDate;
                             firstDayIndex.setDate(1); 
                             firstDayIndex = firstDayIndex.getDay();
-
-        console.log(`last day is ${lastDay}`);
-        console.log(`last day index is ${lastDayIndex}`);
-        console.log(`first day index is ${firstDayIndex}`);
-        console.log(`----------------------`);
 
         let prevMonthLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
 
@@ -346,6 +387,35 @@ document.addEventListener("DOMContentLoaded", () => {
                 item.classList.add("calendar__activeDay");
             }
         })
+
+        getResource('http://localhost:3000/requests')
+        .then(data => {
+            data.forEach(({date, time, name, color, notification_10min, notification_1hour, notification_1day}) => {
+                let day = date.split(".")[0];
+                //day = +day < 10 ? "0" + day : day;
+                let month = date.split(".")[1];
+                //month = +month < 10 ? "0" + month : month;
+                let year = date.split(".")[2];
+
+                if (mm + 1 == month && currentDate.getFullYear() == year) {
+                    days.querySelectorAll(".calendar__actualMonth").forEach(item => {
+                        if (+item.innerHTML == day) {
+                            item.style.backgroundColor = color;
+                            item.style.color = "white";
+                        }
+                    })
+                }
+            });
+        });
+
+        let array = days.querySelectorAll("div");
+
+        for (let index = 5; index < 42;) {
+            array[index].style.color = "red";
+            array[index + 1].style.color = "red";
+
+            index += 7;
+        }
     };
 
     buildCalendar();
@@ -373,8 +443,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     calendar__days.addEventListener("click", (event) => {
+
         if (!event.target.classList.contains("days")) {
 
+            document.querySelectorAll(".task").forEach(item => {item.remove()});
+
+            let d = +event.target.innerHTML < 10 ? "0" + event.target.innerHTML : event.target.innerHTML,
+                m = currentDate.getMonth() + 1 < 10 ? "0" + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1,
+                y = currentDate.getFullYear();
+
+            let clickedDay = `${d}.${m}.${y}`;
+
+            buildTask(clickedDay);
+        
             days.querySelectorAll("div").forEach(item => {
                 item.classList.remove("calendar__activeDay");
             })
@@ -424,5 +505,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
     //     checkSystemColorScheme();
     // });
-                
-});
+         
+    
+
+
+});  

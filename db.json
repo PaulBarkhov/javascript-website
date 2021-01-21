@@ -1,0 +1,104 @@
+{
+  "tasks": [
+    {
+      "date": "28.1.2021",
+      "time": "15:00",
+      "name": "Termin",
+      "color": "blue",
+      "notification_10min": "checked",
+      "notification_1hour": "",
+      "notification_1day": ""
+    },
+    {
+      "date": "5.2.2021",
+      "time": "17:00",
+      "name": "Wichtig",
+      "color": "red",
+      "notification_10min": "",
+      "notification_1hour": "",
+      "notification_1day": "checked"
+    }
+  ],
+  "requests": [
+    {
+      "date": "21.01",
+      "time": "16:28",
+      "name": "New task",
+      "color": "blue",
+      "notification_10min": "",
+      "notification_1hour": "",
+      "notification_1day": "checked",
+      "id": 1
+    },
+    {
+      "date": "21.01",
+      "time": "16:31",
+      "name": "New task",
+      "color": "blue",
+      "notification_10min": "",
+      "notification_1hour": "",
+      "notification_1day": "checked",
+      "id": 2
+    },
+    {
+      "date": "01.01",
+      "time": "19:40",
+      "name": "New task",
+      "color": "green",
+      "notification_10min": "",
+      "notification_1hour": "",
+      "notification_1day": "checked",
+      "id": 3
+    },
+    {
+      "date": "21.01",
+      "time": "16:34",
+      "name": "New task",
+      "color": "blue",
+      "notification_10min": "",
+      "notification_1hour": "",
+      "notification_1day": "checked",
+      "id": 4
+    },
+    {
+      "date": "21.01",
+      "time": "16:34",
+      "name": "New task",
+      "color": "red",
+      "notification_10min": "",
+      "notification_1hour": "",
+      "notification_1day": "checked",
+      "id": 5
+    },
+    {
+      "date": "29.01",
+      "time": "17:35",
+      "name": "New task",
+      "color": "blue",
+      "notification_10min": "",
+      "notification_1hour": "",
+      "notification_1day": "checked",
+      "id": 6
+    },
+    {
+      "date": "21.01",
+      "time": "17:44",
+      "name": "New task",
+      "color": "green",
+      "notification_10min": "",
+      "notification_1hour": "",
+      "notification_1day": "checked",
+      "id": 7
+    },
+    {
+      "name": "New task",
+      "color": "blue",
+      "date": "14.01.2021",
+      "time": "20:26",
+      "notification_10min": "checked",
+      "notification_1hour": "",
+      "notification_1day": "",
+      "id": 8
+    }
+  ]
+}
